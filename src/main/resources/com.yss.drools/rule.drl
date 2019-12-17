@@ -1,0 +1,85 @@
+import cn.edu.bjtu.ebosrule.entity.Terminal
+import cn.edu.bjtu.ebosrule.controller.WebDataController
+import cn.edu.bjtu.ebosrule.controller.TerminalDataController
+
+/*温度是0，湿度是1
+大于是0，小于是1,等于是2
+警告是0*/
+
+
+rule "温度大于"
+//no-loop true
+when
+    $terminal : Terminal(terminal_value>=threshold && parameterName=="0" && symbol=="0" && operation=="0")
+/*    后面的参数是传感器数据*/
+    then
+        $terminal.setFlag1(1);
+    end
+
+rule "温度小于"
+//no-loop true
+when
+    $terminal : Terminal(terminal_value<threshold && parameterName=="0" && symbol=="1" && operation=="0")
+
+    then
+        $terminal.setFlag1(2);
+    end
+
+
+rule "湿度大于"
+//no-loop true
+when
+    $terminal : Terminal(terminal_value>=threshold && parameterName=="1" && symbol=="0" && operation=="0")
+
+    then
+        $terminal.setFlag2(1);
+    end
+
+rule "湿度小于"
+//no-loop true
+when
+    $terminal : Terminal(terminal_value<threshold && parameterName=="1" && symbol=="1" && operation=="0")
+
+    then
+        $terminal.setFlag2(2);
+    end
+
+
+
+
+rule "温度大于1"
+//no-loop true
+when
+    $terminal : Terminal(terminal_value>=threshold && parameterName=="0" && symbol=="0")
+/*    后面的参数是传感器数据*/
+    then
+        $terminal.setFlag1(1);
+    end
+
+rule "温度小于1"
+//no-loop true
+when
+    $terminal : Terminal(terminal_value<threshold && parameterName=="0" && symbol=="1")
+
+    then
+        $terminal.setFlag1(2);
+    end
+
+
+rule "湿度大于1"
+//no-loop true
+when
+    $terminal : Terminal(terminal_value>=threshold && parameterName=="1" && symbol=="0")
+
+    then
+        $terminal.setFlag2(1);
+    end
+
+rule "湿度小于1"
+//no-loop true
+when
+    $terminal : Terminal(terminal_value<threshold && parameterName=="1" && symbol=="1")
+
+    then
+        $terminal.setFlag2(2);
+    end
