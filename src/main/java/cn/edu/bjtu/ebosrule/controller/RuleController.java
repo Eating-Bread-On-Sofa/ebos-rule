@@ -27,8 +27,8 @@ public class RuleController {
     @Value("${server.edgex}")
     private String ip;
 
+    @CrossOrigin
     @GetMapping("/rules")
-    @ResponseBody
     public LayuiTableResultUtil<List<Rule>> Rules(@RequestParam Integer page, @RequestParam Integer limit) {
         Pageable pageable = PageRequest.of(page-1, limit);
         Page<Rule> rules =  ruleService.findAllRule(pageable);
@@ -36,8 +36,8 @@ public class RuleController {
         return rulesTable;
     }
 
+    @CrossOrigin
     @PostMapping("/ruleCreate")
-    @ResponseBody
     public Boolean addRule(@RequestBody Rule rule) {
         if (rule != null) {
             if (ruleService.addRule(rule)) {
@@ -47,8 +47,8 @@ public class RuleController {
         return false;
     }
 
+    @CrossOrigin
     @DeleteMapping("/rule")
-    @ResponseBody
     public LayuiTableResultUtil<String> deleteRule(@RequestBody Rule rule){
         // System.out.println(rule.getRuleId());
         String deleteStatus = ruleService.deleteRule(rule.getRuleId());

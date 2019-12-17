@@ -27,8 +27,8 @@ public class TerminalDataController {
     public static String name;
     public static int value;
 
+    @CrossOrigin
     @PostMapping("/terminaldata")
-    @ResponseBody
     public String msgTest(@RequestBody JSONObject json1)
     {
         mqService.publish("rules_terminal",json1);

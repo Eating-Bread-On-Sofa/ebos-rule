@@ -19,8 +19,8 @@ public class WebDataController {
     public static String operation;
     public static String service;
 
+    @CrossOrigin
     @PostMapping("/webdata")
-    @ResponseBody
     public String Webdata(@RequestBody JSONObject info){
 
         int threshold = info.getIntValue("ruleParaThreshold");
