@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import cn.edu.bjtu.ebosrule.entity.Terminal;
 import cn.edu.bjtu.ebosrule.service.MqService;
-import org.apache.activemq.ActiveMQConnectionFactory;
 import org.junit.Test;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -13,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jms.ConnectionFactory;
-
 
 @RequestMapping("/api")
 @RestController
@@ -22,7 +19,6 @@ import javax.jms.ConnectionFactory;
 public class TerminalDataController {
     @Autowired
     MqService mqService;
-    public static ConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 
     public static String name;
     public static int value;
@@ -57,71 +53,76 @@ public class TerminalDataController {
         KieSession kieSession = kieContainer.newKieSession("all-rules");
 
         Terminal terminal = new Terminal();
+        Terminal terminal2 = new Terminal();
+        Terminal terminal3 = new Terminal();
+        Terminal terminal4 = new Terminal();
+        Terminal terminal5 = new Terminal();
+        Terminal terminal6 = new Terminal();
+        Terminal terminal7 = new Terminal();
+        Terminal terminal8 = new Terminal();
+        Terminal terminal9 = new Terminal();
+        Terminal terminal10 = new Terminal();
+
 
         kieSession.insert(terminal);
+        kieSession.insert(terminal2);
+        kieSession.insert(terminal3);
+        kieSession.insert(terminal4);
+        kieSession.insert(terminal5);
+        kieSession.insert(terminal6);
+        kieSession.insert(terminal7);
+        kieSession.insert(terminal8);
+        kieSession.insert(terminal9);
+        kieSession.insert(terminal10);
+
         kieSession.fireAllRules();//通知规则引擎执行规则
 
         int flag1=terminal.getFlag1();
-        int flag2=terminal.getFlag2();
+        int flag2=terminal2.getFlag2();
+        int flag3=terminal3.getFlag3();
+        int flag4=terminal4.getFlag4();
+        int flag5=terminal5.getFlag5();
+        int flag6=terminal6.getFlag6();
+        int flag7=terminal7.getFlag7();
+        int flag8=terminal8.getFlag8();
+        int flag9=terminal9.getFlag9();
+        int flag10=terminal10.getFlag10();
 
-        int OutThreshold=WebDataController.threshold;
+        ruleTemplet(WebDataController.threshold[0],WebDataController.parameterName[0],WebDataController.symbol[0],WebDataController.operation[0],WebDataController.service[0],flag1);
+        ruleTemplet(WebDataController.threshold[1],WebDataController.parameterName[1],WebDataController.symbol[1],WebDataController.operation[1],WebDataController.service[1],flag2);
+        ruleTemplet(WebDataController.threshold[2],WebDataController.parameterName[2],WebDataController.symbol[2],WebDataController.operation[2],WebDataController.service[2],flag3);
+        ruleTemplet(WebDataController.threshold[3],WebDataController.parameterName[3],WebDataController.symbol[3],WebDataController.operation[3],WebDataController.service[3],flag4);
+        ruleTemplet(WebDataController.threshold[4],WebDataController.parameterName[4],WebDataController.symbol[4],WebDataController.operation[4],WebDataController.service[4],flag5);
+        ruleTemplet(WebDataController.threshold[5],WebDataController.parameterName[5],WebDataController.symbol[5],WebDataController.operation[5],WebDataController.service[5],flag6);
+        ruleTemplet(WebDataController.threshold[6],WebDataController.parameterName[6],WebDataController.symbol[6],WebDataController.operation[6],WebDataController.service[6],flag7);
+        ruleTemplet(WebDataController.threshold[7],WebDataController.parameterName[7],WebDataController.symbol[7],WebDataController.operation[7],WebDataController.service[7],flag8);
+        ruleTemplet(WebDataController.threshold[8],WebDataController.parameterName[8],WebDataController.symbol[8],WebDataController.operation[7],WebDataController.service[8],flag9);
+        ruleTemplet(WebDataController.threshold[9],WebDataController.parameterName[9],WebDataController.symbol[9],WebDataController.operation[8],WebDataController.service[9],flag10);
+
+        kieSession.dispose();
+    }
+    public void ruleTemplet (int OutThreshold,String name,String symbol,String operation,String service,int flag)
+    {
         String OutName=" ";
         String OutSymbol=" ";
-        {
-            if(WebDataController.parameterName.equals("0")){OutName = "温度";}
-            if(WebDataController.parameterName.equals("1")){OutName = "湿度";}
-        }
-        {
-            if(WebDataController.symbol.equals("0")){OutSymbol = ">";}
-            if(WebDataController.symbol.equals("1")){OutSymbol = "<";}
-            if(WebDataController.symbol.equals("2")){OutSymbol = "=";}
-        }
 
-        if (flag1!=0 || flag2!=0)
+        if (flag!=0)
         {
-            System.out.println("输出条件为："+OutName+OutSymbol+OutThreshold);
+            if(name.equals("0")){OutName = "温度 ";}
+            if(name.equals("1")){OutName = "湿度 ";}
+            if(symbol.equals("0")){OutSymbol = "> ";}
+            if(symbol.equals("1")){OutSymbol = "< ";}
+            if(symbol.equals("2")){OutSymbol = "= ";}
+            System.out.println("执行的输出条件为："+OutName+OutSymbol+OutThreshold);
             JSONObject alert = new JSONObject();
             alert.put("content",OutName+OutSymbol+OutThreshold+"!");
             mqService.publish("notice",alert);
-
-            if (WebDataController.operation.equals("1"))
+            if (operation.equals("1"))
             {
                 JSONObject json = new JSONObject();
-                json.put("name",WebDataController.service);
+                json.put("name",service);
                 mqService.publish("run.command",json);
             }
         }
-
-/*        String tem1="温度高了,";
-        String tem2="温度低了,";
-        String wet1="湿度高了,";
-        String wet2="湿度高了,";
-        String op=" ";
-        if(WebDataController.operation.equals("0")){op="要进行警告";}
-        if(WebDataController.operation.equals("1")){op="要关闭设备";}
-        if(WebDataController.operation.equals("2")){op="要进行赋值";}
-        if (flag1==1){
-            System.out.println(tem1+op);
-            JSONObject alert = new JSONObject();
-            alert.put("content",tem1+op);
-            mqService.publish("notice",alert);
-        }
-        if (flag1==2){
-            System.out.println(tem2+op);
-            JSONObject alert = new JSONObject();
-            alert.put("content",tem2+op);
-            mqService.publish("notice",alert);}
-        if (flag2==1){
-            System.out.println(wet1+op);
-            JSONObject alert = new JSONObject();
-            alert.put("content",wet1+op);
-            mqService.publish("notice",alert);}
-        if (flag2==2){
-            System.out.println(wet2+op);
-            JSONObject alert = new JSONObject();
-            alert.put("content",wet2+op);
-            mqService.publish("notice",alert);}*/
-        kieSession.dispose();
     }
-
 }
