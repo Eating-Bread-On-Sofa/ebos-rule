@@ -69,7 +69,8 @@ public class Terminal {
     private String drools_symbol10=WebDataController.symbol[9];
     private String drools_operation10=WebDataController.operation[9];
 
-    int terminal_value=TerminalDataController.value;
+    int terminal_value_temp=TerminalDataController.value_temp;
+    int terminal_value_wet=TerminalDataController.value_wet;
     String terminal_name=TerminalDataController.name;
 
     public int getFlag1() {

@@ -21,7 +21,8 @@ public class TerminalDataController {
     MqService mqService;
 
     public static String name;
-    public static int value;
+    public static int value_temp;
+    public static int value_wet;
 
     @CrossOrigin
     @PostMapping("/terminaldata")
@@ -39,11 +40,22 @@ public class TerminalDataController {
         int value = jsonpacket.getIntValue("value");
         String name = jsonpacket.getString("name");
 
-        this.value=value;
+        if (name.equals("TemperatureDeg"))
+        {   this.value_temp=value;
+            System.out.println("温度为"+value_temp);
+        }
+        if (name.equals("Humidity"))
+        {
+            this.value_wet=value;
+            System.out.println("湿度为"+value_wet);
+        }
+
         this.name=name;
         try{
         Test();}catch (Exception e){}
-        System.out.println("传感器参数---"+value);
+        value_temp=0;
+        value_wet=0;
+        //System.out.println("传感器参数---"+value);
     }
 
     @Test
