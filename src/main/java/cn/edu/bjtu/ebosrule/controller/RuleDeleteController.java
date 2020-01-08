@@ -18,16 +18,18 @@ public class RuleDeleteController {
         String ruleName = info.getString("ruleName");
 
         for (int i = 0; i<10; i++) {
-            if ((WebDataController.ruleName[i]).equals(ruleName)) {
-                WebDataController.parameterName[i] = null;
-                WebDataController.threshold[i] = 0;
-                WebDataController.symbol[i] = null;
-                WebDataController.operation[i] = null;
-                WebDataController.service[i] = null;
-                break;
+            if((WebDataController.ruleName[i])!=null) {
+                if ((WebDataController.ruleName[i]).equals(ruleName)) {
+                    WebDataController.parameterName[i] = null;
+                    WebDataController.threshold[i] = 0;
+                    WebDataController.symbol[i] = null;
+                    WebDataController.operation[i] = null;
+                    WebDataController.service[i] = null;
+                    break;
+                }
             }
-
+            else
+                continue;
         }
     }
-
 }
