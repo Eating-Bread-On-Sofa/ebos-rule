@@ -5,7 +5,6 @@ import cn.edu.bjtu.ebosrule.service.MqProducer;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import cn.edu.bjtu.ebosrule.entity.Terminal;
-import cn.edu.bjtu.ebosrule.service.MqService;
 import org.junit.Test;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -20,8 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 public class TerminalDataController {
     @Autowired
-    MqService mqService;
-    @Autowired
     MqFactory mqFactory;
 
     public static String name;
@@ -32,35 +29,35 @@ public class TerminalDataController {
     @PostMapping("/terminaldata")
     public String msgTest(@RequestBody JSONObject json1)
     {
-        mqService.publish("rules_terminal",json1);
+        mqFactory.createProducer().publish("rules_terminal",json1.toString());
         return "发送成功";
     }
 
-    @JmsListener(destination = "rules_terminal", containerFactory = "topicContainerFactory")
-    public void Terminaldata( JSONObject info ){
-        System.out.println("规则引擎收到消息"+info);
-        JSONArray jsonarray = info.getJSONArray("readings");
-        JSONObject jsonpacket= jsonarray.getJSONObject(0);
-        int value = jsonpacket.getIntValue("value");
-        String name = jsonpacket.getString("name");
-
-        if (name.equals("TemperatureDeg"))
-        {   this.value_temp=value;
-            System.out.println("温度为"+value_temp);
-        }
-        if (name.equals("Humidity"))
-        {
-            this.value_wet=value;
-            System.out.println("湿度为"+value_wet);
-        }
-
-        this.name=name;
-        try{
-        Test();}catch (Exception e){}
-        value_temp=0;
-        value_wet=0;
-        //System.out.println("传感器参数---"+value);
-    }
+//    @JmsListener(destination = "rules_terminal", containerFactory = "topicContainerFactory")
+//    public void Terminaldata( JSONObject info ){
+//        System.out.println("规则引擎收到消息"+info);
+//        JSONArray jsonarray = info.getJSONArray("readings");
+//        JSONObject jsonpacket= jsonarray.getJSONObject(0);
+//        int value = jsonpacket.getIntValue("value");
+//        String name = jsonpacket.getString("name");
+//
+//        if (name.equals("TemperatureDeg"))
+//        {   this.value_temp=value;
+//            System.out.println("温度为"+value_temp);
+//        }
+//        if (name.equals("Humidity"))
+//        {
+//            this.value_wet=value;
+//            System.out.println("湿度为"+value_wet);
+//        }
+//
+//        this.name=name;
+//        try{
+//        Test();}catch (Exception e){}
+//        value_temp=0;
+//        value_wet=0;
+//        //System.out.println("传感器参数---"+value);
+//    }
 
     @Test
     public void Test() {
@@ -121,6 +118,7 @@ public class TerminalDataController {
     {
         String OutName=" ";
         String OutSymbol=" ";
+        MqProducer mqProducer = mqFactory.createProducer();
 
         if (flag!=0)
         {
@@ -132,12 +130,13 @@ public class TerminalDataController {
             System.out.println("执行的输出条件为："+OutName+OutSymbol+OutThreshold);
             JSONObject alert = new JSONObject();
             alert.put("content",OutName+OutSymbol+OutThreshold+"!");
-            mqService.publish("notice",alert);
+
+            mqProducer.publish("notice",alert.toString());
             if (operation.equals("1"))
             {
                 JSONObject json = new JSONObject();
                 json.put("name",service);
-                mqService.publish("run.command",json);
+                mqProducer.publish("run.command",json.toString());
             }
         }
     }
