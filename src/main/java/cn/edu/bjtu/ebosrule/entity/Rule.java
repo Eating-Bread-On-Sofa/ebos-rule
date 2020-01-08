@@ -22,7 +22,6 @@ public class Rule {
     private int ruleStatus;
     private int ruleExecute;
 
-
     public String getRuleId() {
         return ruleId;
     }
