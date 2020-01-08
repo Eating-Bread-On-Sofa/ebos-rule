@@ -1,5 +1,7 @@
 package cn.edu.bjtu.ebosrule.controller;
 
+import cn.edu.bjtu.ebosrule.service.MqFactory;
+import cn.edu.bjtu.ebosrule.service.MqProducer;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import cn.edu.bjtu.ebosrule.entity.Terminal;
@@ -22,6 +24,8 @@ import javax.jms.ConnectionFactory;
 public class TerminalDataController {
     @Autowired
     MqService mqService;
+    @Autowired
+    MqFactory mqFactory;
     public static ConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 
     public static String name;
