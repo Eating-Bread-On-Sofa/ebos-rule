@@ -23,33 +23,32 @@ public class InitListener implements ApplicationRunner {
     private String name;
 
     @Override
-    public void run(ApplicationArguments arguments){
+    public void run(ApplicationArguments arguments) {
         new Thread(() -> {
             MqConsumer mqConsumer = mqFactory.createConsumer("rules_terminal");
             while (true) {
+                String msg = mqConsumer.subscribe();
+                JSONObject info = JSON.parseObject(msg);
+                System.out.println("规则引擎收到消息" + info);
+                JSONArray jsonarray = info.getJSONArray("readings");
+                JSONObject jsonpacket = jsonarray.getJSONObject(0);
+                int value = jsonpacket.getIntValue("value");
+                String name = jsonpacket.getString("name");
+
+                if (name.equals("TemperatureDeg")) {
+                    TerminalDataController.value_temp = value;
+                    System.out.println("温度为" + TerminalDataController.value_temp);
+                }
+                if (name.equals("Humidity")) {
+                    TerminalDataController.value_wet = value;
+                    System.out.println("湿度为" + TerminalDataController.value_wet);
+                }
+
+                TerminalDataController.name = name;
                 try {
-                    String msg = mqConsumer.subscribe();
-                    JSONObject info = JSON.parseObject(msg);
-                    System.out.println("规则引擎收到消息"+info);
-                    JSONArray jsonarray = info.getJSONArray("readings");
-                    JSONObject jsonpacket= jsonarray.getJSONObject(0);
-                    int value = jsonpacket.getIntValue("value");
-                    String name = jsonpacket.getString("name");
-
-                    if (name.equals("TemperatureDeg"))
-                    {   TerminalDataController.value_temp=value;
-                        System.out.println("温度为"+TerminalDataController.value_temp);
-                    }
-                    if (name.equals("Humidity"))
-                    {
-                        TerminalDataController.value_wet=value;
-                        System.out.println("湿度为"+TerminalDataController.value_wet);
-                    }
-
-                    TerminalDataController.name=name;
-                    try{
-                        terminalDataController.Test();}catch (Exception e){}
-                }catch (Exception e){}
+                    terminalDataController.Test();
+                } catch (Exception e) {
+                }
             }
         }).start();
     }
