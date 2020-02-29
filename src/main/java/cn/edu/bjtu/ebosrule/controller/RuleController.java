@@ -1,12 +1,8 @@
 package cn.edu.bjtu.ebosrule.controller;
 
-import cn.edu.bjtu.ebosrule.service.Log;
-import cn.edu.bjtu.ebosrule.service.LogFind;
-import cn.edu.bjtu.ebosrule.service.impl.LogFindImpl;
-import cn.edu.bjtu.ebosrule.service.log.LogImpl;
-import com.alibaba.fastjson.JSONObject;
 import cn.edu.bjtu.ebosrule.dao.RuleRepository;
 import cn.edu.bjtu.ebosrule.entity.Rule;
+import cn.edu.bjtu.ebosrule.service.LogService;
 import cn.edu.bjtu.ebosrule.service.RuleService;
 import cn.edu.bjtu.ebosrule.util.LayuiTableResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +25,7 @@ public class RuleController {
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
-    Log log = new LogImpl();
-    @Autowired
-    LogFind logFind = new LogFindImpl();
+    LogService logService;
     @Value("${server.edgex}")
     private String ip;
 
@@ -65,12 +59,12 @@ public class RuleController {
     @CrossOrigin
     @RequestMapping ("/logtest")
     public String logtest1(){
-        log.error("rule");
+        logService.info("rule");
         return "成功";
     }
     @CrossOrigin
     @GetMapping("/logtest")
     public String logtest2(){
-        return logFind.readAll();
+        return logService.findLogByCategory("info");
     }
 }
