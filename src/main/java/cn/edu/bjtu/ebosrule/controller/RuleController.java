@@ -80,6 +80,7 @@ public class RuleController {
     @CrossOrigin
     @DeleteMapping("/rule")
     public LayuiTableResultUtil<String> deleteRule(@RequestBody Rule rule){
+        // System.out.println(rule.getRuleId());
         String deleteStatus = ruleService.deleteRule(rule.getRuleId());
         return  new LayuiTableResultUtil<String>("",deleteStatus,0,1);
     }
