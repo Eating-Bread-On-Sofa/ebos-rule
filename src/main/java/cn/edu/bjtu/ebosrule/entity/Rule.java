@@ -18,9 +18,9 @@ public class Rule {
     private String rulePara;
     private String ruleToDevice;
     private String ruleToFunction;
-    private int ruleJudge;
+    private String ruleJudge;
     private int ruleStatus;
-    private int ruleExecute;
+    private String ruleExecute;
 
     public String getRuleId() {
         return ruleId;
@@ -70,15 +70,15 @@ public class Rule {
         this.ruleToFunction = ruleToFunction;
     }
 
-    public int getRuleJudge() { return ruleJudge; }
+    public String getRuleJudge() { return ruleJudge; }
 
-    public void setRuleJudge(int ruleJudge) {this.ruleJudge = ruleJudge; }
+    public void setRuleJudge(String ruleJudge) {this.ruleJudge = ruleJudge; }
 
     public int getRuleStatus() { return ruleStatus; }
 
-    public void setRuleExecute(int ruleExecute) {this.ruleExecute = ruleExecute; }
+    public void setRuleExecute(String ruleExecute) {this.ruleExecute = ruleExecute; }
 
-    public int getRuleExecute() { return ruleExecute; }
+    public String getRuleExecute() { return ruleExecute; }
 
     public void setRuleStatus(int ruleStatus) {this.ruleStatus = ruleStatus; }
 

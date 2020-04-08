@@ -15,7 +15,10 @@ public class RuleDeleteController {
 
     public void ruleDelete(@RequestBody JSONObject info)
     {
+        System.out.println("delete收到的json为："+info);
         String ruleName = info.getString("ruleName");
+
+        System.out.println("删除的ruleName为："+ruleName);
 
         for (int i = 0; i<10; i++) {
             if((WebDataController.ruleName[i])!=null) {

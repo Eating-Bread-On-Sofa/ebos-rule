@@ -4,6 +4,8 @@ import cn.edu.bjtu.ebosrule.service.Log;
 import cn.edu.bjtu.ebosrule.service.LogFind;
 import cn.edu.bjtu.ebosrule.service.impl.LogFindImpl;
 import cn.edu.bjtu.ebosrule.service.log.LogImpl;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import cn.edu.bjtu.ebosrule.dao.RuleRepository;
 import cn.edu.bjtu.ebosrule.entity.Rule;
@@ -16,6 +18,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+
 
 import java.util.List;
 
@@ -35,13 +39,31 @@ public class RuleController {
     @Value("${server.edgex}")
     private String ip;
 
+
     @CrossOrigin
     @GetMapping("/rules")
     public LayuiTableResultUtil<List<Rule>> Rules(@RequestParam Integer page, @RequestParam Integer limit) {
+        System.out.println("++++rules接口+++++");
         Pageable pageable = PageRequest.of(page-1, limit);
         Page<Rule> rules =  ruleService.findAllRule(pageable);
         LayuiTableResultUtil<List<Rule>> rulesTable=new LayuiTableResultUtil<List<Rule>>("",rules.getContent(),0,(int)rules.getTotalElements());
         return rulesTable;
+    }
+
+    @CrossOrigin
+    @GetMapping("/getRules")
+    public JSONArray getRule(){
+        JSONArray ja = new JSONArray();
+        for (int i = 0; i < ruleService.findAllRule().size(); i++) {
+            JSONObject j=new JSONObject();
+            j.put("ruleName",ruleService.findAllRule().get(i).getRuleName());
+            j.put("parameter",ruleService.findAllRule().get(i).getRulePara());
+            j.put("ruleJudge",ruleService.findAllRule().get(i).getRuleJudge());
+            j.put("threshold",ruleService.findAllRule().get(i).getRuleParaThreshold());
+            j.put("ruleExecute",ruleService.findAllRule().get(i).getRuleExecute());
+            ja.add(j);
+        }
+        return ja;
     }
 
     @CrossOrigin
@@ -58,7 +80,6 @@ public class RuleController {
     @CrossOrigin
     @DeleteMapping("/rule")
     public LayuiTableResultUtil<String> deleteRule(@RequestBody Rule rule){
-        // System.out.println(rule.getRuleId());
         String deleteStatus = ruleService.deleteRule(rule.getRuleId());
         return  new LayuiTableResultUtil<String>("",deleteStatus,0,1);
     }

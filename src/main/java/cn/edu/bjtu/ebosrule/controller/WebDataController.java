@@ -18,6 +18,8 @@ public class WebDataController {
     @CrossOrigin
     @PostMapping("/webdata")
     public void Webdata(@RequestBody JSONObject info){
+        System.out.println("++++收到前端数据+++++");
+        System.out.println(info);
 
         int threshold = info.getIntValue("ruleParaThreshold");
         String name = info.getString("rulePara");
@@ -38,5 +40,4 @@ public class WebDataController {
                 break;
             }
     }
-
 }

@@ -128,6 +128,7 @@ public class TerminalDataController {
             if(symbol.equals("1")){OutSymbol = "< ";}
             if(symbol.equals("2")){OutSymbol = "= ";}
             System.out.println("执行的输出条件为："+OutName+OutSymbol+OutThreshold);
+
             JSONObject alert = new JSONObject();
             alert.put("content",OutName+OutSymbol+OutThreshold+"!");
 
