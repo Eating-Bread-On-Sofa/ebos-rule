@@ -78,10 +78,6 @@ public class RuleController {
     @CrossOrigin
     @PostMapping("/rule")
     public LayuiTableResultUtil<String> deleteRule(@RequestBody Rule rule){
-        System.out.println(rule);
-        System.out.println("+++++删除rule+++++");
-        System.out.println("收到的rule是："+rule);
-        System.out.println(rule.getRuleId());
         String deleteStatus = ruleService.deleteRule(rule.getRuleId());
         return  new LayuiTableResultUtil<String>("",deleteStatus,0,1);
     }
@@ -97,4 +93,22 @@ public class RuleController {
     public String logtest2(){
         return logFind.readAll();
     }
+
+    @CrossOrigin
+    @GetMapping("/getFormInfo")
+    public JSONArray getFormInfo(){
+        JSONArray ja = new JSONArray();
+        JSONObject j=new JSONObject();
+        j.put("value","第一个");
+        ja.add(j);
+        j=new JSONObject();
+        j.put("value","第二个");
+        ja.add(j);
+        j=new JSONObject();
+        j.put("value","第三个");
+        ja.add(j);
+        System.out.println(ja);
+        return ja;
+    }
+
 }
