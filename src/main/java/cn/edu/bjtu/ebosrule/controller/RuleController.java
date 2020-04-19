@@ -1,10 +1,6 @@
 package cn.edu.bjtu.ebosrule.controller;
 
-import cn.edu.bjtu.ebosrule.service.Log;
-import cn.edu.bjtu.ebosrule.service.LogFind;
-import cn.edu.bjtu.ebosrule.service.impl.LogFindImpl;
-import cn.edu.bjtu.ebosrule.service.log.LogImpl;
-import com.alibaba.fastjson.JSON;
+import cn.edu.bjtu.ebosrule.service.LogService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import cn.edu.bjtu.ebosrule.dao.RuleRepository;
@@ -32,9 +28,7 @@ public class RuleController {
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
-    Log log = new LogImpl();
-    @Autowired
-    LogFind logFind = new LogFindImpl();
+    LogService logService;
     @Value("${server.edgex}")
     private String ip;
 
@@ -84,17 +78,5 @@ public class RuleController {
         System.out.println(rule.getRuleId());
         String deleteStatus = ruleService.deleteRule(rule.getRuleId());
         return  new LayuiTableResultUtil<String>("",deleteStatus,0,1);
-    }
-
-    @CrossOrigin
-    @RequestMapping ("/logtest")
-    public String logtest1(){
-        log.error("rule");
-        return "成功";
-    }
-    @CrossOrigin
-    @GetMapping("/logtest")
-    public String logtest2(){
-        return logFind.readAll();
     }
 }
