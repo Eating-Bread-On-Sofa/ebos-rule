@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class LogServiceImpl implements LogService {
-    private static String serviceName = "网关实例";
+    private static String serviceName = "规则引擎";
     @Autowired
     private MongoTemplate mongoTemplate;
     @Override
