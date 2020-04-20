@@ -122,15 +122,10 @@ public class TerminalDataController {
 
         if (flag!=0)
         {
-            if(name.equals("0")){OutName = "温度 ";}
-            if(name.equals("1")){OutName = "湿度 ";}
-            if(symbol.equals("0")){OutSymbol = "> ";}
-            if(symbol.equals("1")){OutSymbol = "< ";}
-            if(symbol.equals("2")){OutSymbol = "= ";}
-            System.out.println("执行的输出条件为："+OutName+OutSymbol+OutThreshold);
+            System.out.println("执行的输出条件为："+name+symbol+OutThreshold);
 
             JSONObject alert = new JSONObject();
-            alert.put("content",OutName+OutSymbol+OutThreshold+"!");
+            alert.put("content",name+symbol+OutThreshold+"!");
 
             mqProducer.publish("notice",alert.toString());
             if (operation.equals("1"))

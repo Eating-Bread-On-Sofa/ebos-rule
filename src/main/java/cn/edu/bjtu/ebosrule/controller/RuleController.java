@@ -63,6 +63,7 @@ public class RuleController {
     public Boolean addRule(@RequestBody Rule rule) {
         if (rule != null) {
             if (ruleService.addRule(rule)) {
+                logService.info("添加新规则"+rule.getRuleName());
                 return true;
             }
         }
