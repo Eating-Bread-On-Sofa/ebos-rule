@@ -31,6 +31,7 @@ public class RuleController {
     LogService logService;
     @Value("${server.edgex}")
     private String ip;
+    JSONArray ja = new JSONArray();
 
     @CrossOrigin
     @GetMapping("/rules")
@@ -53,8 +54,11 @@ public class RuleController {
             j.put("threshold",ruleService.findAllRule().get(i).getRuleParaThreshold());
             j.put("ruleExecute",ruleService.findAllRule().get(i).getRuleExecute());
             j.put("ruleId",ruleService.findAllRule().get(i).getRuleId());
+            j.put("service",ruleService.findAllRule().get(i).getService());
             ja.add(j);
         }
+        this.ja=ja;
+        this.loadRule();
         return ja;
     }
 
@@ -93,4 +97,34 @@ public class RuleController {
         System.out.println(ja);
         return ja;
     }
+
+
+    public void loadRule()
+    {
+        JSONArray ja = this.ja;
+
+        for (int i = 0; i < ja.size(); i++)
+        {
+            JSONObject j = (JSONObject) ja.get(i);
+            int threshold = j.getIntValue("threshold");
+            String name = j.getString("parameter");
+            String symbol = j.getString("ruleJudge");
+            String operation = j.getString("ruleExecute");
+            String service = j.getString("service");
+            String ruleName = j.getString("ruleName");
+
+            for (int x = 0; x<10; x++)
+                if(WebDataController.parameterName[x] == null)
+                {
+                    WebDataController.parameterName[x] = name;
+                    WebDataController.threshold[x] = threshold;
+                    WebDataController.symbol[x] = symbol;
+                    WebDataController.operation[x] = operation;
+                    WebDataController.service[x] = service;
+                    WebDataController.ruleName[x] = ruleName;
+                    break;
+                }
+        }
+    }
+
 }

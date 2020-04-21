@@ -22,6 +22,16 @@ public class Rule {
     private int ruleStatus;
     private String ruleExecute;
 
+    private String service;
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
+    }
+
     public String getRuleId() {
         return ruleId;
     }
