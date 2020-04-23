@@ -43,7 +43,7 @@ public class RuleController {
     }
 
     @CrossOrigin
-    @GetMapping("/getRules")
+    @GetMapping("/getRuleLists")
     public JSONArray getRule(){
         JSONArray ja = new JSONArray();
         for (int i = 0; i < ruleService.findAllRule().size(); i++) {
@@ -82,21 +82,39 @@ public class RuleController {
     }
 
     @CrossOrigin
-    @GetMapping("/getFormInfo")
-    public JSONArray getFormInfo(){
+    @GetMapping("/getFormPara")
+    public JSONArray getFormPara(){
         JSONArray ja = new JSONArray();
         JSONObject j=new JSONObject();
-        j.put("value","第一个");
+        j.put("value","温度");
         ja.add(j);
         j=new JSONObject();
-        j.put("value","第二个");
+        j.put("value","湿度");
         ja.add(j);
         j=new JSONObject();
-        j.put("value","第三个");
+        j.put("value","其他参数");
         ja.add(j);
         System.out.println(ja);
         return ja;
     }
+
+    @CrossOrigin
+    @GetMapping("/getFormService")
+    public JSONArray getFormService(){
+        JSONArray ja = new JSONArray();
+        JSONObject j=new JSONObject();
+        j.put("value","服务一");
+        ja.add(j);
+        j=new JSONObject();
+        j.put("value","服务二");
+        ja.add(j);
+        j=new JSONObject();
+        j.put("value","服务三");
+        ja.add(j);
+        System.out.println(ja);
+        return ja;
+    }
+
 
     public void loadRule()
     {

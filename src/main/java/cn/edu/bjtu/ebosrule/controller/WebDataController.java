@@ -24,7 +24,6 @@ public class WebDataController {
         String operation = info.getString("ruleExecute");
         String service = info.getString("service");
         String ruleName = info.getString("ruleName");
-
         for (int i = 0; i<10; i++)
             if (this.parameterName[i] == null)
             {
