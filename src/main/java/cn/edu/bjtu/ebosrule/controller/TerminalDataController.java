@@ -128,7 +128,7 @@ public class TerminalDataController {
             alert.put("content",name+symbol+OutThreshold+"!");
 
             mqProducer.publish("notice",alert.toString());
-            if (operation.equals("1"))
+            if (operation.equals("警告且操作设备"))
             {
                 JSONObject json = new JSONObject();
                 json.put("name",service);

@@ -67,7 +67,7 @@ public class RuleController {
     public Boolean addRule(@RequestBody Rule rule) {
         if (rule != null) {
             if (ruleService.addRule(rule)) {
-                logService.info("添加新规则"+rule.getRuleName());
+                logService.info("添加新规则"+rule.getRulePara()+rule.getRuleJudge()+rule.getRuleParaThreshold());
                 return true;
             }
         }
@@ -98,7 +98,6 @@ public class RuleController {
         return ja;
     }
 
-
     public void loadRule()
     {
         JSONArray ja = this.ja;
@@ -113,17 +112,12 @@ public class RuleController {
             String service = j.getString("service");
             String ruleName = j.getString("ruleName");
 
-            for (int x = 0; x<10; x++)
-                if(WebDataController.parameterName[x] == null)
-                {
-                    WebDataController.parameterName[x] = name;
-                    WebDataController.threshold[x] = threshold;
-                    WebDataController.symbol[x] = symbol;
-                    WebDataController.operation[x] = operation;
-                    WebDataController.service[x] = service;
-                    WebDataController.ruleName[x] = ruleName;
-                    break;
-                }
+            WebDataController.parameterName[i] = name;
+            WebDataController.threshold[i] = threshold;
+            WebDataController.symbol[i] = symbol;
+            WebDataController.operation[i] = operation;
+            WebDataController.service[i] = service;
+            WebDataController.ruleName[i] = ruleName;
         }
     }
 
