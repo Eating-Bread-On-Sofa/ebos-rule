@@ -3,171 +3,170 @@ import cn.edu.bjtu.ebosrule.controller.WebDataController
 import cn.edu.bjtu.ebosrule.controller.TerminalDataController
 
 rule "温度大于1"
-when    $terminal : Terminal(terminal_value_temp>=drools_threshold && drools_parameterName=="温度" && drools_symbol==">")
-then        $terminal.setFlag1(1);
+when    $terminal1 : Terminal(terminal_value_temp>=drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1==">")
+then        $terminal1.setFlag1(1);
 end
 rule "温度小于1"
-when    $terminal : Terminal(terminal_value_temp<drools_threshold && drools_parameterName=="温度" && drools_symbol=="<")
-then        $terminal.setFlag1(1);
+when    $terminal1 : Terminal(terminal_value_temp<drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1=="<")
+then        $terminal1.setFlag1(1);
 end
 rule "湿度大于1"
-when    $terminal : Terminal(terminal_value_wet>=drools_threshold && drools_parameterName=="湿度" && drools_symbol==">")
-then        $terminal.setFlag1(1);
+when    $terminal1 : Terminal(terminal_value_wet>=drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1==">")
+then        $terminal1.setFlag1(1);
 end
 rule "湿度小于1"
-when    $terminal : Terminal(terminal_value_wet<drools_threshold && drools_parameterName=="湿度" && drools_symbol=="<")
-then        $terminal.setFlag1(1);
+when    $terminal1 : Terminal(terminal_value_wet<drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1=="<")
+then        $terminal1.setFlag1(1);
 end
 
 rule "温度大于2"
-when    $terminal2 : Terminal(terminal_value_temp>=drools_threshold2 && drools_parameterName2=="温度" && drools_symbol2==">")
+when    $terminal2 : Terminal(terminal_value_temp>=drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1==">")
 then        $terminal2.setFlag2(1);
 end
 rule "温度小于2"
-when    $terminal2 : Terminal(terminal_value_temp<drools_threshold2 && drools_parameterName2=="温度" && drools_symbol2=="<")
+when    $terminal2 : Terminal(terminal_value_temp<drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1=="<")
 then        $terminal2.setFlag2(1);
 end
 rule "湿度大于2"
-when    $terminal2 : Terminal(terminal_value_wet>=drools_threshold2 && drools_parameterName2=="湿度" && drools_symbol2==">")
+when    $terminal2 : Terminal(terminal_value_wet>=drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1==">")
 then        $terminal2.setFlag2(1);
 end
 rule "湿度小于2"
-when    $terminal2 : Terminal(terminal_value_wet<drools_threshold2 && drools_parameterName2=="湿度" && drools_symbol2=="<")
+when    $terminal2 : Terminal(terminal_value_wet<drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1=="<")
 then        $terminal2.setFlag2(1);
 end
 
 rule "温度大于3"
-when    $terminal3 : Terminal(terminal_value_temp>=drools_threshold3 && drools_parameterName3=="温度" && drools_symbol3==">")
+when    $terminal3 : Terminal(terminal_value_temp>=drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1==">")
 then        $terminal3.setFlag3(1);
 end
 rule "温度小于3"
-when    $terminal3 : Terminal(terminal_value_temp<drools_threshold3 && drools_parameterName3=="温度" && drools_symbol3=="<")
+when    $terminal3 : Terminal(terminal_value_temp<drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1=="<")
 then        $terminal3.setFlag3(1);
 end
 rule "湿度大于3"
-when    $terminal3 : Terminal(terminal_value_wet>=drools_threshold3 && drools_parameterName3=="湿度" && drools_symbol3==">")
+when    $terminal3 : Terminal(terminal_value_wet>=drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1==">")
 then        $terminal3.setFlag3(1);
 end
 rule "湿度小于3"
-when    $terminal3 : Terminal(terminal_value_wet<drools_threshold3 && drools_parameterName3=="湿度" && drools_symbol3=="<")
+when    $terminal3 : Terminal(terminal_value_wet<drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1=="<")
 then        $terminal3.setFlag3(1);
 end
 
 rule "温度大于4"
-when    $terminal4 : Terminal(terminal_value_temp>=drools_threshold4 && drools_parameterName4=="温度" && drools_symbol4==">")
+when    $terminal4 : Terminal(terminal_value_temp>=drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1==">")
 then        $terminal4.setFlag4(1);
 end
 rule "温度小于4"
-when    $terminal4 : Terminal(terminal_value_temp<drools_threshold4 && drools_parameterName4=="温度" && drools_symbol4=="<")
+when    $terminal4 : Terminal(terminal_value_temp<drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1=="<")
 then        $terminal4.setFlag4(1);
 end
 rule "湿度大于4"
-when    $terminal4 : Terminal(terminal_value_wet>=drools_threshold4 && drools_parameterName4=="湿度" && drools_symbol4==">")
+when    $terminal4 : Terminal(terminal_value_wet>=drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1==">")
 then        $terminal4.setFlag4(1);
 end
 rule "湿度小于4"
-when    $terminal4 : Terminal(terminal_value_wet<drools_threshold4 && drools_parameterName4=="湿度" && drools_symbol4=="<")
+when    $terminal4 : Terminal(terminal_value_wet<drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1=="<")
 then        $terminal4.setFlag4(1);
 end
 
 rule "温度大于5"
-when    $terminal5 : Terminal(terminal_value_temp>=drools_threshold5 && drools_parameterName5=="温度" && drools_symbol5==">")
+when    $terminal5 : Terminal(terminal_value_temp>=drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1==">")
 then        $terminal5.setFlag5(1);
 end
 rule "温度小于5"
-when    $terminal5 : Terminal(terminal_value_temp<drools_threshold5 && drools_parameterName5=="温度" && drools_symbol5=="<")
+when    $terminal5 : Terminal(terminal_value_temp<drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1=="<")
 then        $terminal5.setFlag5(1);
 end
 rule "湿度大于5"
-when    $terminal5 : Terminal(terminal_value_wet>=drools_threshold5 && drools_parameterName5=="湿度" && drools_symbol5==">")
+when    $terminal5 : Terminal(terminal_value_wet>=drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1==">")
 then        $terminal5.setFlag5(1);
 end
 rule "湿度小于5"
-when    $terminal5 : Terminal(terminal_value_wet<drools_threshold5 && drools_parameterName5=="湿度" && drools_symbol5=="<")
+when    $terminal5 : Terminal(terminal_value_wet<drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1=="<")
 then        $terminal5.setFlag5(1);
 end
 
 rule "温度大于6"
-when    $terminal6 : Terminal(terminal_value_temp>=drools_threshold6 && drools_parameterName6=="温度" && drools_symbol6==">")
+when    $terminal6 : Terminal(terminal_value_temp>=drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1==">")
 then        $terminal6.setFlag6(1);
 end
 rule "温度小于6"
-when    $terminal6 : Terminal(terminal_value_temp<drools_threshold6 && drools_parameterName6=="温度" && drools_symbol6=="<")
+when    $terminal6 : Terminal(terminal_value_temp<drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1=="<")
 then        $terminal6.setFlag6(1);
 end
 rule "湿度大于6"
-when    $terminal6 : Terminal(terminal_value_wet>=drools_threshold6 && drools_parameterName6=="湿度" && drools_symbol6==">")
+when    $terminal6 : Terminal(terminal_value_wet>=drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1==">")
 then        $terminal6.setFlag6(1);
 end
 rule "湿度小于6"
-when    $terminal6 : Terminal(terminal_value_wet<drools_threshold5 && drools_parameterName5=="湿度" && drools_symbol6=="<")
+when    $terminal6 : Terminal(terminal_value_wet<drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1=="<")
 then        $terminal6.setFlag6(1);
 end
-
 rule "温度大于7"
-when    $terminal7 : Terminal(terminal_value_temp>=drools_threshold7 && drools_parameterName7=="温度" && drools_symbol7==">")
+when    $terminal7 : Terminal(terminal_value_temp>=drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1==">")
 then        $terminal7.setFlag7(1);
 end
 rule "温度小于7"
-when    $terminal7 : Terminal(terminal_value_temp<drools_threshold7 && drools_parameterName7=="温度" && drools_symbol7=="<")
+when    $terminal7 : Terminal(terminal_value_temp<drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1=="<")
 then        $terminal7.setFlag7(1);
 end
 rule "湿度大于7"
-when    $terminal7 : Terminal(terminal_value_wet>=drools_threshold7 && drools_parameterName7=="湿度" && drools_symbol7==">")
+when    $terminal7 : Terminal(terminal_value_wet>=drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1==">")
 then        $terminal7.setFlag7(1);
 end
 rule "湿度小于7"
-when    $terminal7 : Terminal(terminal_value_wet<drools_threshold7 && drools_parameterName7=="湿度" && drools_symbol7=="<")
+when    $terminal7 : Terminal(terminal_value_wet<drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1=="<")
 then        $terminal7.setFlag7(1);
 end
 
 rule "温度大于8"
-when    $terminal8 : Terminal(terminal_value_temp>=drools_threshold8 && drools_parameterName8=="温度" && drools_symbol8==">")
+when    $terminal8 : Terminal(terminal_value_temp>=drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1==">")
 then        $terminal8.setFlag8(1);
 end
 rule "温度小于8"
-when    $terminal8 : Terminal(terminal_value_temp<drools_threshold8 && drools_parameterName8=="温度" && drools_symbol8=="<")
+when    $terminal8 : Terminal(terminal_value_temp<drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1=="<")
 then        $terminal8.setFlag8(1);
 end
 rule "湿度大于8"
-when    $terminal8 : Terminal(terminal_value_wet>=drools_threshold8 && drools_parameterName8=="湿度" && drools_symbol8==">")
+when    $terminal8 : Terminal(terminal_value_wet>=drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1==">")
 then        $terminal8.setFlag8(1);
 end
 rule "湿度小于8"
-when    $terminal8 : Terminal(terminal_value_wet<drools_threshold8 && drools_parameterName8=="湿度" && drools_symbol8=="<")
+when    $terminal8 : Terminal(terminal_value_wet<drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1=="<")
 then        $terminal8.setFlag8(1);
 end
 
 rule "温度大于9"
-when    $terminal9 : Terminal(terminal_value_temp>=drools_threshold9 && drools_parameterName9=="温度" && drools_symbol9==">")
+when    $terminal9 : Terminal(terminal_value_temp>=drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1==">")
 then        $terminal9.setFlag9(1);
 end
 rule "温度小于9"
-when    $terminal9 : Terminal(terminal_value_temp<drools_threshold9 && drools_parameterName9=="温度" && drools_symbol9=="<")
+when    $terminal9 : Terminal(terminal_value_temp<drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1=="<")
 then        $terminal9.setFlag9(1);
 end
 rule "湿度大于9"
-when    $terminal9 : Terminal(terminal_value_wet>=drools_threshold9 && drools_parameterName9=="湿度" && drools_symbol9==">")
+when    $terminal9 : Terminal(terminal_value_wet>=drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1==">")
 then        $terminal9.setFlag9(1);
 end
 rule "湿度小于9"
-when    $terminal9 : Terminal(terminal_value_wet<drools_threshold9 && drools_parameterName9=="湿度" && drools_symbol9=="<")
+when    $terminal9 : Terminal(terminal_value_wet<drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1=="<")
 then        $terminal9.setFlag9(1);
 end
 
 rule "温度大于10"
-when    $terminal10 : Terminal(terminal_value_temp>=drools_threshold10 && drools_parameterName10=="温度" && drools_symbol10==">")
+when    $terminal10 : Terminal(terminal_value_temp>=drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1==">")
 then        $terminal10.setFlag10(1);
 end
 rule "温度小于10"
-when    $terminal10 : Terminal(terminal_value_temp<drools_threshold10 && drools_parameterName10=="温度" && drools_symbol10=="<")
+when    $terminal10 : Terminal(terminal_value_temp<drools_threshold1 && drools_parameterName1=="温度" && drools_symbol1=="<")
 then        $terminal10.setFlag10(1);
 end
 rule "湿度大于10"
-when    $terminal10 : Terminal(terminal_value_wet>=drools_threshold10 && drools_parameterName10=="湿度" && drools_symbol10==">")
+when    $terminal10 : Terminal(terminal_value_wet>=drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1==">")
 then        $terminal10.setFlag10(1);
 end
 rule "湿度小于10"
-when    $terminal10 : Terminal(terminal_value_wet<drools_threshold10 && drools_parameterName10=="湿度" && drools_symbol10=="<")
+when    $terminal10 : Terminal(terminal_value_wet<drools_threshold1 && drools_parameterName1=="湿度" && drools_symbol1=="<")
 then        $terminal10.setFlag10(1);
 end
