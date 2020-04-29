@@ -23,9 +23,13 @@ public class Rule {
     private String ruleExecute;
 
     private String service;
+    private String device;
 
     public String getService() {
         return service;
+    }
+    public String getDevice() {
+        return device;
     }
 
     public void setService(String service) {

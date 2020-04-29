@@ -14,6 +14,7 @@ public class WebDataController {
     public static String [] operation= new String[10];
     public static String [] service= new String[10];
     public static String [] ruleName= new String[10];
+    public static String [] device= new String[10];
 
     @CrossOrigin
     @PostMapping("/webdata")
@@ -24,6 +25,7 @@ public class WebDataController {
         String operation = info.getString("ruleExecute");
         String service = info.getString("service");
         String ruleName = info.getString("ruleName");
+        String device = info.getString("device");
         for (int i = 0; i<10; i++)
             if (this.parameterName[i] == null)
             {
@@ -33,6 +35,7 @@ public class WebDataController {
                 this.operation[i] = operation;
                 this.service[i] = service;
                 this.ruleName[i] = ruleName;
+                this.device[i] = device;
                 break;
             }
     }

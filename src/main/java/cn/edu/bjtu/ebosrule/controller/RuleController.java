@@ -55,6 +55,7 @@ public class RuleController {
             j.put("ruleExecute",ruleService.findAllRule().get(i).getRuleExecute());
             j.put("ruleId",ruleService.findAllRule().get(i).getRuleId());
             j.put("service",ruleService.findAllRule().get(i).getService());
+            j.put("device",ruleService.findAllRule().get(i).getDevice());
             ja.add(j);
         }
         this.ja=ja;
