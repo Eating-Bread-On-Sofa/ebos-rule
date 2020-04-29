@@ -101,16 +101,16 @@ public class TerminalDataController {
 
         kieSession.fireAllRules();//通知规则引擎执行规则
 
-        int flag1=terminal1.getFlag1();
-        int flag2=terminal2.getFlag2();
-        int flag3=terminal3.getFlag3();
-        int flag4=terminal4.getFlag4();
-        int flag5=terminal5.getFlag5();
-        int flag6=terminal6.getFlag6();
-        int flag7=terminal7.getFlag7();
-        int flag8=terminal8.getFlag8();
-        int flag9=terminal9.getFlag9();
-        int flag10=terminal10.getFlag10();
+        int flag1=terminal1.getFlag();
+        int flag2=terminal2.getFlag();
+        int flag3=terminal3.getFlag();
+        int flag4=terminal4.getFlag();
+        int flag5=terminal5.getFlag();
+        int flag6=terminal6.getFlag();
+        int flag7=terminal7.getFlag();
+        int flag8=terminal8.getFlag();
+        int flag9=terminal9.getFlag();
+        int flag10=terminal10.getFlag();
 
         ruleTemplate(WebDataController.threshold[0],WebDataController.parameterName[0],WebDataController.symbol[0],WebDataController.operation[0],WebDataController.service[0],flag1);
         ruleTemplate(WebDataController.threshold[1],WebDataController.parameterName[1],WebDataController.symbol[1],WebDataController.operation[1],WebDataController.service[1],flag2);
