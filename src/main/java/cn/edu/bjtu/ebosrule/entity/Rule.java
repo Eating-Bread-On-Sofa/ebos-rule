@@ -24,13 +24,13 @@ public class Rule {
 
     private String service;
     private String device;
+    private String scenario;
 
     public String getService() {
         return service;
     }
-    public String getDevice() {
-        return device;
-    }
+    public String getDevice() { return device; }
+    public String getScenario() { return scenario; }
 
     public void setService(String service) {
         this.service = service;

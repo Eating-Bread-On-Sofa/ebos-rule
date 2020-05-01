@@ -1,5 +1,6 @@
 package cn.edu.bjtu.ebosrule.controller;
 
+import cn.edu.bjtu.ebosrule.service.InitListener;
 import cn.edu.bjtu.ebosrule.service.MqFactory;
 import cn.edu.bjtu.ebosrule.service.MqProducer;
 import com.alibaba.fastjson.JSONArray;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 @RestController
 
+
 public class TerminalDataController {
     @Autowired
     MqFactory mqFactory;
@@ -24,6 +26,9 @@ public class TerminalDataController {
     public static String name;
     public static int value_temp;
     public static int value_wet;
+    public static String device;
+    public static int value;
+    public static String ChineseName;
 
     @CrossOrigin
     @PostMapping("/terminaldata")
@@ -33,31 +38,6 @@ public class TerminalDataController {
         return "发送成功";
     }
 
-//    @JmsListener(destination = "rules_terminal", containerFactory = "topicContainerFactory")
-//    public void Terminaldata( JSONObject info ){
-//        System.out.println("规则引擎收到消息"+info);
-//        JSONArray jsonarray = info.getJSONArray("readings");
-//        JSONObject jsonpacket= jsonarray.getJSONObject(0);
-//        int value = jsonpacket.getIntValue("value");
-//        String name = jsonpacket.getString("name");
-//
-//        if (name.equals("TemperatureDeg"))
-//        {   this.value_temp=value;
-//            System.out.println("温度为"+value_temp);
-//        }
-//        if (name.equals("Humidity"))
-//        {
-//            this.value_wet=value;
-//            System.out.println("湿度为"+value_wet);
-//        }
-//
-//        this.name=name;
-//        try{
-//        Test();}catch (Exception e){}
-//        value_temp=0;
-//        value_wet=0;
-//        //System.out.println("传感器参数---"+value);
-//    }
 
     @Test
     public void Test() {
@@ -88,7 +68,11 @@ public class TerminalDataController {
         terminalTemplate(terminal10,WebDataController.threshold[9],WebDataController.parameterName[9],WebDataController.symbol[9],WebDataController.operation[9]);
 
 
-        kieSession.insert(terminal1);
+        if(this.ChineseName.equals(terminal1.getDrools_parameterName1()))
+        {
+            kieSession.insert(terminal1);
+        }
+
         kieSession.insert(terminal2);
         kieSession.insert(terminal3);
         kieSession.insert(terminal4);
@@ -112,35 +96,37 @@ public class TerminalDataController {
         int flag9=terminal9.getFlag();
         int flag10=terminal10.getFlag();
 
-        ruleTemplate(WebDataController.threshold[0],WebDataController.parameterName[0],WebDataController.symbol[0],WebDataController.operation[0],WebDataController.service[0],flag1);
-        ruleTemplate(WebDataController.threshold[1],WebDataController.parameterName[1],WebDataController.symbol[1],WebDataController.operation[1],WebDataController.service[1],flag2);
-        ruleTemplate(WebDataController.threshold[2],WebDataController.parameterName[2],WebDataController.symbol[2],WebDataController.operation[2],WebDataController.service[2],flag3);
-        ruleTemplate(WebDataController.threshold[3],WebDataController.parameterName[3],WebDataController.symbol[3],WebDataController.operation[3],WebDataController.service[3],flag4);
-        ruleTemplate(WebDataController.threshold[4],WebDataController.parameterName[4],WebDataController.symbol[4],WebDataController.operation[4],WebDataController.service[4],flag5);
-        ruleTemplate(WebDataController.threshold[5],WebDataController.parameterName[5],WebDataController.symbol[5],WebDataController.operation[5],WebDataController.service[5],flag6);
-        ruleTemplate(WebDataController.threshold[6],WebDataController.parameterName[6],WebDataController.symbol[6],WebDataController.operation[6],WebDataController.service[6],flag7);
-        ruleTemplate(WebDataController.threshold[7],WebDataController.parameterName[7],WebDataController.symbol[7],WebDataController.operation[7],WebDataController.service[7],flag8);
-        ruleTemplate(WebDataController.threshold[8],WebDataController.parameterName[8],WebDataController.symbol[8],WebDataController.operation[7],WebDataController.service[8],flag9);
-        ruleTemplate(WebDataController.threshold[9],WebDataController.parameterName[9],WebDataController.symbol[9],WebDataController.operation[8],WebDataController.service[9],flag10);
+        ruleTemplate(WebDataController.threshold[0],WebDataController.parameterName[0],WebDataController.symbol[0],WebDataController.operation[0],WebDataController.service[0],WebDataController.device[0],WebDataController.scenario[0],flag1);
+        ruleTemplate(WebDataController.threshold[1],WebDataController.parameterName[1],WebDataController.symbol[1],WebDataController.operation[1],WebDataController.service[1],WebDataController.device[1],WebDataController.scenario[1],flag2);
+        ruleTemplate(WebDataController.threshold[2],WebDataController.parameterName[2],WebDataController.symbol[2],WebDataController.operation[2],WebDataController.service[2],WebDataController.device[2],WebDataController.scenario[2],flag3);
+        ruleTemplate(WebDataController.threshold[3],WebDataController.parameterName[3],WebDataController.symbol[3],WebDataController.operation[3],WebDataController.service[3],WebDataController.device[3],WebDataController.scenario[3],flag4);
+        ruleTemplate(WebDataController.threshold[4],WebDataController.parameterName[4],WebDataController.symbol[4],WebDataController.operation[4],WebDataController.service[4],WebDataController.device[4],WebDataController.scenario[4],flag5);
+        ruleTemplate(WebDataController.threshold[5],WebDataController.parameterName[5],WebDataController.symbol[5],WebDataController.operation[5],WebDataController.service[5],WebDataController.device[5],WebDataController.scenario[5],flag6);
+        ruleTemplate(WebDataController.threshold[6],WebDataController.parameterName[6],WebDataController.symbol[6],WebDataController.operation[6],WebDataController.service[6],WebDataController.device[6],WebDataController.scenario[6],flag7);
+        ruleTemplate(WebDataController.threshold[7],WebDataController.parameterName[7],WebDataController.symbol[7],WebDataController.operation[7],WebDataController.service[7],WebDataController.device[7],WebDataController.scenario[7],flag8);
+        ruleTemplate(WebDataController.threshold[8],WebDataController.parameterName[8],WebDataController.symbol[8],WebDataController.operation[7],WebDataController.service[8],WebDataController.device[8],WebDataController.scenario[8],flag9);
+        ruleTemplate(WebDataController.threshold[9],WebDataController.parameterName[9],WebDataController.symbol[9],WebDataController.operation[8],WebDataController.service[9],WebDataController.device[9],WebDataController.scenario[9],flag10);
 
         kieSession.dispose();
     }
-    public void ruleTemplate (int OutThreshold,String name,String symbol,String operation,String service,int flag)
+    public void ruleTemplate (int OutThreshold,String name,String symbol,String operation,String service, String device,String scenario, int flag)
     {
+        if(name==null)
+            return;
         MqProducer mqProducer = mqFactory.createProducer();
+        String content=name+symbol+OutThreshold;
 
         if (flag!=0)
         {
-            System.out.println("执行的输出条件为："+name+symbol+OutThreshold);
-
             JSONObject alert = new JSONObject();
-            alert.put("content",name+symbol+OutThreshold+"!");
+            alert.put("content",content+"!");
 
             mqProducer.publish("notice",alert.toString());
             if (operation.equals("警告且操作设备"))
             {
                 JSONObject json = new JSONObject();
                 json.put("name",service);
+                json.put("source",scenario);
                 mqProducer.publish("run.command",json.toString());
             }
         }

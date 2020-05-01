@@ -56,6 +56,7 @@ public class RuleController {
             j.put("ruleId",ruleService.findAllRule().get(i).getRuleId());
             j.put("service",ruleService.findAllRule().get(i).getService());
             j.put("device",ruleService.findAllRule().get(i).getDevice());
+            j.put("scenario",ruleService.findAllRule().get(i).getScenario());
             ja.add(j);
         }
         this.ja=ja;
@@ -82,41 +83,6 @@ public class RuleController {
         return  new LayuiTableResultUtil<String>("",deleteStatus,0,1);
     }
 
-    @CrossOrigin
-    @GetMapping("/getFormPara")
-    public JSONArray getFormPara(){
-        JSONArray ja = new JSONArray();
-        JSONObject j=new JSONObject();
-        j.put("value","温度");
-        ja.add(j);
-        j=new JSONObject();
-        j.put("value","湿度");
-        ja.add(j);
-        j=new JSONObject();
-        j.put("value","其他参数");
-        ja.add(j);
-        System.out.println(ja);
-        return ja;
-    }
-
-    @CrossOrigin
-    @GetMapping("/getFormService")
-    public JSONArray getFormService(){
-        JSONArray ja = new JSONArray();
-        JSONObject j=new JSONObject();
-        j.put("value","服务一");
-        ja.add(j);
-        j=new JSONObject();
-        j.put("value","服务二");
-        ja.add(j);
-        j=new JSONObject();
-        j.put("value","服务三");
-        ja.add(j);
-        System.out.println(ja);
-        return ja;
-    }
-
-
     public void loadRule()
     {
         JSONArray ja = this.ja;
@@ -130,6 +96,7 @@ public class RuleController {
             String operation = j.getString("ruleExecute");
             String service = j.getString("service");
             String ruleName = j.getString("ruleName");
+            String device = j.getString("device");
 
             WebDataController.parameterName[i] = name;
             WebDataController.threshold[i] = threshold;
@@ -137,6 +104,7 @@ public class RuleController {
             WebDataController.operation[i] = operation;
             WebDataController.service[i] = service;
             WebDataController.ruleName[i] = ruleName;
+            WebDataController.device[i] = device;
         }
     }
 

@@ -1,7 +1,6 @@
 package cn.edu.bjtu.ebosrule.entity;
 
 import cn.edu.bjtu.ebosrule.controller.TerminalDataController;
-import cn.edu.bjtu.ebosrule.controller.WebDataController;
 import lombok.Data;
 
 @Data
