@@ -13,14 +13,13 @@ public class Terminal {
     private String drools_parameterName1;
     private String drools_symbol1;
     private String drools_operation1;
+    private String drools_scenario1;
 
     public int getDrools_threshold1() {
         return drools_threshold1;
     }
     public int setDrools_threshold1(int num) { drools_threshold1=num; return drools_threshold1;}
-    public String getDrools_parameterName1() {
-        return drools_parameterName1;
-    }
+    public String getDrools_parameterName1() { return drools_parameterName1; }
     public String setDrools_parameterName1(String str) { drools_parameterName1=str; return drools_parameterName1;}
     public String getDrools_symbol1() {
         return drools_symbol1;
@@ -30,6 +29,10 @@ public class Terminal {
         return drools_operation1;
     }
     public String setDrools_operation1(String str) { drools_operation1=str; return drools_operation1;}
+    public String getDrools_scenario1() {
+        return drools_scenario1;
+    }
+    public String setDrools_scenario1(String str) { drools_scenario1=str; return drools_scenario1;}
 
 
     int terminal_value_temp=TerminalDataController.value_temp;

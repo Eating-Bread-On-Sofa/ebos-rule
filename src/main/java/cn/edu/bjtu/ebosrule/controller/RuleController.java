@@ -97,6 +97,7 @@ public class RuleController {
             String service = j.getString("service");
             String ruleName = j.getString("ruleName");
             String device = j.getString("device");
+            String scenario = j.getString("scenario");
 
             WebDataController.parameterName[i] = name;
             WebDataController.threshold[i] = threshold;
@@ -105,6 +106,7 @@ public class RuleController {
             WebDataController.service[i] = service;
             WebDataController.ruleName[i] = ruleName;
             WebDataController.device[i] = device;
+            WebDataController.scenario[i] = scenario;
         }
     }
 

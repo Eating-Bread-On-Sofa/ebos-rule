@@ -56,16 +56,16 @@ public class TerminalDataController {
         Terminal terminal9 = new Terminal();
         Terminal terminal10 = new Terminal();
 
-        terminalTemplate(terminal1,WebDataController.threshold[0],WebDataController.parameterName[0],WebDataController.symbol[0],WebDataController.operation[0]);
-        terminalTemplate(terminal2,WebDataController.threshold[1],WebDataController.parameterName[1],WebDataController.symbol[1],WebDataController.operation[1]);
-        terminalTemplate(terminal3,WebDataController.threshold[2],WebDataController.parameterName[2],WebDataController.symbol[2],WebDataController.operation[2]);
-        terminalTemplate(terminal4,WebDataController.threshold[3],WebDataController.parameterName[3],WebDataController.symbol[3],WebDataController.operation[3]);
-        terminalTemplate(terminal5,WebDataController.threshold[4],WebDataController.parameterName[4],WebDataController.symbol[4],WebDataController.operation[4]);
-        terminalTemplate(terminal6,WebDataController.threshold[5],WebDataController.parameterName[5],WebDataController.symbol[5],WebDataController.operation[5]);
-        terminalTemplate(terminal7,WebDataController.threshold[6],WebDataController.parameterName[6],WebDataController.symbol[6],WebDataController.operation[6]);
-        terminalTemplate(terminal8,WebDataController.threshold[7],WebDataController.parameterName[7],WebDataController.symbol[7],WebDataController.operation[7]);
-        terminalTemplate(terminal9,WebDataController.threshold[8],WebDataController.parameterName[8],WebDataController.symbol[8],WebDataController.operation[8]);
-        terminalTemplate(terminal10,WebDataController.threshold[9],WebDataController.parameterName[9],WebDataController.symbol[9],WebDataController.operation[9]);
+        terminalTemplate(terminal1,WebDataController.threshold[0],WebDataController.parameterName[0],WebDataController.symbol[0],WebDataController.operation[0],WebDataController.scenario[0]);
+        terminalTemplate(terminal2,WebDataController.threshold[1],WebDataController.parameterName[1],WebDataController.symbol[1],WebDataController.operation[1],WebDataController.scenario[1]);
+        terminalTemplate(terminal3,WebDataController.threshold[2],WebDataController.parameterName[2],WebDataController.symbol[2],WebDataController.operation[2],WebDataController.scenario[2]);
+        terminalTemplate(terminal4,WebDataController.threshold[3],WebDataController.parameterName[3],WebDataController.symbol[3],WebDataController.operation[3],WebDataController.scenario[3]);
+        terminalTemplate(terminal5,WebDataController.threshold[4],WebDataController.parameterName[4],WebDataController.symbol[4],WebDataController.operation[4],WebDataController.scenario[4]);
+        terminalTemplate(terminal6,WebDataController.threshold[5],WebDataController.parameterName[5],WebDataController.symbol[5],WebDataController.operation[5],WebDataController.scenario[5]);
+        terminalTemplate(terminal7,WebDataController.threshold[6],WebDataController.parameterName[6],WebDataController.symbol[6],WebDataController.operation[6],WebDataController.scenario[6]);
+        terminalTemplate(terminal8,WebDataController.threshold[7],WebDataController.parameterName[7],WebDataController.symbol[7],WebDataController.operation[7],WebDataController.scenario[7]);
+        terminalTemplate(terminal9,WebDataController.threshold[8],WebDataController.parameterName[8],WebDataController.symbol[8],WebDataController.operation[8],WebDataController.scenario[8]);
+        terminalTemplate(terminal10,WebDataController.threshold[9],WebDataController.parameterName[9],WebDataController.symbol[9],WebDataController.operation[9],WebDataController.scenario[9]);
 
 
         if(this.ChineseName.equals(terminal1.getDrools_parameterName1()))
@@ -115,6 +115,7 @@ public class TerminalDataController {
             return;
         MqProducer mqProducer = mqFactory.createProducer();
         String content=name+symbol+OutThreshold;
+        System.out.println("场景++++++++"+scenario);
 
         if (flag!=0)
         {
@@ -132,11 +133,12 @@ public class TerminalDataController {
             }
         }
     }
-    public void terminalTemplate(Terminal t, int threshold, String parameterName, String symbol, String operation)
+    public void terminalTemplate(Terminal t, int threshold, String parameterName, String symbol, String operation, String scenario)
     {
         t.setDrools_threshold1(threshold);
         t.setDrools_parameterName1(parameterName);
         t.setDrools_symbol1(symbol);
         t.setDrools_operation1(operation);
+        t.setDrools_scenario1(scenario);
     }
 }
