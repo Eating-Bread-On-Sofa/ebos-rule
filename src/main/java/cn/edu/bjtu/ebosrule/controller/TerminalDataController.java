@@ -120,13 +120,13 @@ public class TerminalDataController {
         {
             JSONObject alert = new JSONObject();
             alert.put("content",content+"!");
+            alert.put("source",scenario);
 
             mqProducer.publish("notice",alert.toString());
             if (operation.equals("警告且操作设备"))
             {
                 JSONObject json = new JSONObject();
                 json.put("name",service);
-                json.put("source",scenario);
                 mqProducer.publish("run.command",json.toString());
             }
         }
