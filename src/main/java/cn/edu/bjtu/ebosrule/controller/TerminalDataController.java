@@ -119,7 +119,8 @@ public class TerminalDataController {
         if (flag!=0)
         {
             JSONObject alert = new JSONObject();
-            alert.put("content",content+"!");
+            alert.put("type","alert");
+            alert.put("message",content+"!");
             alert.put("source",scenario);
 
             mqProducer.publish("notice",alert.toString());
