@@ -16,10 +16,16 @@ public class WebDataController {
     public static String [] ruleName= new String[10];
     public static String [] device= new String[10];
     public static String [] scenario= new String[10];
+    public static String [] parameterName2 = new String[10];
+    public static int [] threshold2= new int [10];
+    public static String [] symbol2= new String[10];
+    public static String [] parameterName3 = new String[10];
+    public static int [] threshold3= new int [10];
+    public static String [] symbol3= new String[10];
 
     @CrossOrigin
     @PostMapping("/webdata")
-    public void Webdata(@RequestBody JSONObject info){
+    public String Webdata(@RequestBody JSONObject info){
         int threshold = info.getIntValue("ruleParaThreshold");
         String name = info.getString("rulePara");
         String symbol = info.getString("ruleJudge");
@@ -28,6 +34,12 @@ public class WebDataController {
         String ruleName = info.getString("ruleName");
         String device = info.getString("device");
         String scenario = info.getString("scenario");
+        int threshold2 = info.getIntValue("ruleParaThreshold2");
+        String name2 = info.getString("rulePara2");
+        String symbol2 = info.getString("ruleJudge2");
+        int threshold3 = info.getIntValue("ruleParaThreshold3");
+        String name3 = info.getString("rulePara3");
+        String symbol3 = info.getString("ruleJudge3");
 
         for (int i = 0; i<10; i++)
             if (this.parameterName[i] == null)
@@ -40,7 +52,14 @@ public class WebDataController {
                 this.ruleName[i] = ruleName;
                 this.device[i] = device;
                 this.scenario[i] = scenario;
+                this.parameterName2[i] = name2;
+                this.threshold2[i] = threshold2;
+                this.symbol2[i] = symbol2;
+                this.parameterName3[i] = name3;
+                this.threshold3[i] = threshold3;
+                this.symbol3[i] = symbol3;
                 break;
             }
+        return "收到前端数据";
     }
 }

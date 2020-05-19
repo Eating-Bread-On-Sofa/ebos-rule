@@ -14,6 +14,12 @@ public class Terminal {
     private String drools_symbol1;
     private String drools_operation1;
     private String drools_scenario1;
+    private int drools_threshold2;
+    private String drools_parameterName2;
+    private String drools_symbol2;
+    private int drools_threshold3;
+    private String drools_parameterName3;
+    private String drools_symbol3;
 
     public int getDrools_threshold1() {
         return drools_threshold1;
@@ -25,6 +31,29 @@ public class Terminal {
         return drools_symbol1;
     }
     public String setDrools_symbol1(String str) { drools_symbol1=str; return drools_symbol1;}
+
+    public int getDrools_threshold2() {
+        return drools_threshold2;
+    }
+    public int setDrools_threshold2(int num) { drools_threshold2=num; return drools_threshold2;}
+    public String getDrools_parameterName2() { return drools_parameterName2; }
+    public String setDrools_parameterName2(String str) { drools_parameterName2=str; return drools_parameterName2;}
+    public String getDrools_symbol2() {
+        return drools_symbol2;
+    }
+    public String setDrools_symbol2(String str) { drools_symbol2=str; return drools_symbol2;}
+
+    public int getDrools_threshold3() {
+        return drools_threshold3;
+    }
+    public int setDrools_threshold3(int num) { drools_threshold3=num; return drools_threshold3;}
+    public String getDrools_parameterName3() { return drools_parameterName3; }
+    public String setDrools_parameterName3(String str) { drools_parameterName3=str; return drools_parameterName3;}
+    public String getDrools_symbol3() {
+        return drools_symbol1;
+    }
+    public String setDrools_symbol3(String str) { drools_symbol3=str; return drools_symbol3;}
+
     public String getDrools_operation1() {
         return drools_operation1;
     }

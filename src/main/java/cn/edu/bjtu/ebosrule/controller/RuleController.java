@@ -57,6 +57,12 @@ public class RuleController {
             j.put("service",ruleService.findAllRule().get(i).getService());
             j.put("device",ruleService.findAllRule().get(i).getDevice());
             j.put("scenario",ruleService.findAllRule().get(i).getScenario());
+            j.put("parameter2",ruleService.findAllRule().get(i).getRulePara2());
+            j.put("ruleJudge2",ruleService.findAllRule().get(i).getRuleJudge2());
+            j.put("threshold2",ruleService.findAllRule().get(i).getRuleParaThreshold2());
+            j.put("parameter3",ruleService.findAllRule().get(i).getRulePara3());
+            j.put("ruleJudge3",ruleService.findAllRule().get(i).getRuleJudge3());
+            j.put("threshold3",ruleService.findAllRule().get(i).getRuleParaThreshold3());
             ja.add(j);
         }
         this.ja=ja;
@@ -98,6 +104,12 @@ public class RuleController {
             String ruleName = j.getString("ruleName");
             String device = j.getString("device");
             String scenario = j.getString("scenario");
+            int threshold2 = j.getIntValue("threshold2");
+            String name2 = j.getString("parameter2");
+            String symbol2 = j.getString("ruleJudge2");
+            int threshold3 = j.getIntValue("threshold3");
+            String name3 = j.getString("parameter3");
+            String symbol3 = j.getString("ruleJudge3");
 
             WebDataController.parameterName[i] = name;
             WebDataController.threshold[i] = threshold;
@@ -107,6 +119,12 @@ public class RuleController {
             WebDataController.ruleName[i] = ruleName;
             WebDataController.device[i] = device;
             WebDataController.scenario[i] = scenario;
+            WebDataController.parameterName2[i] = name2;
+            WebDataController.threshold2[i] = threshold2;
+            WebDataController.symbol2[i] = symbol2;
+            WebDataController.parameterName3[i] = name3;
+            WebDataController.threshold3[i] = threshold3;
+            WebDataController.symbol3[i] = symbol3;
         }
     }
 
