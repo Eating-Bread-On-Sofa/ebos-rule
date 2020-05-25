@@ -15,6 +15,8 @@ public class WebDataController {
     public static String [] service= new String[10];
     public static String [] ruleName= new String[10];
     public static String [] device= new String[10];
+    public static String [] device2= new String[10];
+    public static String [] device3= new String[10];
     public static String [] scenario= new String[10];
     public static String [] parameterName2 = new String[10];
     public static int [] threshold2= new int [10];
@@ -33,6 +35,8 @@ public class WebDataController {
         String service = info.getString("service");
         String ruleName = info.getString("ruleName");
         String device = info.getString("device");
+        String device2 = info.getString("device2");
+        String device3 = info.getString("device3");
         String scenario = info.getString("scenario");
         int threshold2 = info.getIntValue("ruleParaThreshold2");
         String name2 = info.getString("rulePara2");
@@ -51,6 +55,8 @@ public class WebDataController {
                 this.service[i] = service;
                 this.ruleName[i] = ruleName;
                 this.device[i] = device;
+                this.device2[i] = device2;
+                this.device3[i] = device3;
                 this.scenario[i] = scenario;
                 this.parameterName2[i] = name2;
                 this.threshold2[i] = threshold2;

@@ -33,12 +33,18 @@ public class Rule {
 
     private String service;
     private String device;
+    private String device2;
+    private String device3;
     private String scenario;
 
     public String getService() {
         return service;
     }
     public String getDevice() { return device; }
+    public String getDevice2() { return device2; }
+    public String getDevice3() { return device3; }
+
+
     public String getScenario() { return scenario; }
     public void setService(String service) {
         this.service = service;
