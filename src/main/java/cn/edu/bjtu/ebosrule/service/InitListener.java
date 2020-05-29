@@ -45,21 +45,9 @@ public class InitListener implements ApplicationRunner {
                 TerminalDataController.device = device;
 
                 if (name.equals("TemperatureDeg"))
-                    TerminalDataController.ChineseName="温度";
+                    TerminalDataController.value_temp = value;
                 else if (name.equals("Humidity"))
-                    TerminalDataController.ChineseName="湿度";
-
-                if(device.equals("temp and humidity device"))
-                {
-                    if (name.equals("TemperatureDeg")) {
-                        TerminalDataController.value_temp = value;
-                        System.out.println("温度为" + TerminalDataController.value_temp);
-                    }
-                    if (name.equals("Humidity")) {
-                        TerminalDataController.value_wet = value;
-                        System.out.println("湿度为" + TerminalDataController.value_wet);
-                    }
-                }
+                    TerminalDataController.value_wet = value;
 
                 TerminalDataController.name = name;
                 try {

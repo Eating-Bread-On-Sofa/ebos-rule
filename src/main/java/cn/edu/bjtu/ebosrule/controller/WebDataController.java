@@ -24,6 +24,8 @@ public class WebDataController {
     public static String [] parameterName3 = new String[10];
     public static int [] threshold3= new int [10];
     public static String [] symbol3= new String[10];
+    public static String [] logic2 = new String[10];
+    public static String [] logic3 = new String[10];
 
     @CrossOrigin
     @PostMapping("/webdata")
@@ -44,6 +46,8 @@ public class WebDataController {
         int threshold3 = info.getIntValue("ruleParaThreshold3");
         String name3 = info.getString("rulePara3");
         String symbol3 = info.getString("ruleJudge3");
+        String logic2 = info.getString("logic2");
+        String logic3 = info.getString("logic3");
 
         for (int i = 0; i<10; i++)
             if (this.parameterName[i] == null)
@@ -64,6 +68,8 @@ public class WebDataController {
                 this.parameterName3[i] = name3;
                 this.threshold3[i] = threshold3;
                 this.symbol3[i] = symbol3;
+                this.logic2[i] = logic2;
+                this.logic3[i] = logic3;
                 break;
             }
         return "收到前端数据";

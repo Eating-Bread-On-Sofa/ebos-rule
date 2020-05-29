@@ -37,6 +37,16 @@ public class Rule {
     private String device3;
     private String scenario;
 
+    private String logic2;
+    private String logic3;
+
+    public String getLogic2() {
+        return logic2;
+    }
+    public String getLogic3() {
+        return logic3;
+    }
+
     public String getService() {
         return service;
     }
@@ -88,9 +98,7 @@ public class Rule {
     }
     public String getRuleJudge2() { return ruleJudge2; }
     public void setRuleJudge2(String ruleJudge) {this.ruleJudge2 = ruleJudge; }
-    public int getRuleParaThreshold3() {
-        return ruleParaThreshold3;
-    }
+    public int getRuleParaThreshold3() { return ruleParaThreshold3;}
     public void setRuleParaThreshold3(int ruleParaThreshold) {
         this.ruleParaThreshold3 = ruleParaThreshold;
     }

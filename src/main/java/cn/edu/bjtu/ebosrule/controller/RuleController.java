@@ -65,6 +65,8 @@ public class RuleController {
             j.put("parameter3",ruleService.findAllRule().get(i).getRulePara3());
             j.put("ruleJudge3",ruleService.findAllRule().get(i).getRuleJudge3());
             j.put("threshold3",ruleService.findAllRule().get(i).getRuleParaThreshold3());
+            j.put("logic2",ruleService.findAllRule().get(i).getLogic2());
+            j.put("logic3",ruleService.findAllRule().get(i).getLogic3());
             ja.add(j);
         }
         this.ja=ja;
@@ -114,6 +116,8 @@ public class RuleController {
             int threshold3 = j.getIntValue("threshold3");
             String name3 = j.getString("parameter3");
             String symbol3 = j.getString("ruleJudge3");
+            String logic2 = j.getString("logic2");
+            String logic3 = j.getString("logic3");
 
             WebDataController.parameterName[i] = name;
             WebDataController.threshold[i] = threshold;
@@ -131,6 +135,8 @@ public class RuleController {
             WebDataController.parameterName3[i] = name3;
             WebDataController.threshold3[i] = threshold3;
             WebDataController.symbol3[i] = symbol3;
+            WebDataController.logic2[i] = logic2;
+            WebDataController.logic3[i] = logic3;
         }
     }
 
