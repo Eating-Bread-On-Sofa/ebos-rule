@@ -13,6 +13,7 @@ public class RuleDeleteController {
     @CrossOrigin
     @PostMapping("/ruleDelete")
 
+    //清空内存中的数据
     public void ruleDelete(@RequestBody JSONObject info)
     {
         String ruleName = info.getString("ruleName");

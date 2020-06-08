@@ -175,16 +175,16 @@ public class TerminalDataController {
         if(flag1!=0){
             Flag=1;
         }
-        if(flag2!=0 && logic2.equals("或")){
+        else if(flag2!=0 && logic2.equals("或")){
             Flag=1;
         }
-        if(flag3!=0 && logic3.equals("或")){
+        else if(flag3!=0 && logic3.equals("或")){
             Flag=1;
         }
-        if(flag2==0 && logic2.equals("且")){
+        else if(flag2==0 && logic2.equals("且")){
             Flag=0;
         }
-        if(flag3==0 && logic3.equals("且")){
+        else if(flag3==0 && logic3.equals("且")){
             Flag=0;
         }
 

@@ -77,6 +77,7 @@ public class RuleController {
     @CrossOrigin
     @PostMapping("/ruleCreate")
     public Boolean addRule(@RequestBody Rule rule) {
+        System.out.println(rule);
         if (rule != null) {
             if (ruleService.addRule(rule)) {
                 logService.info("添加新规则"+rule.getRulePara()+rule.getRuleJudge()+rule.getRuleParaThreshold());
@@ -96,7 +97,6 @@ public class RuleController {
     public void loadRule()
     {
         JSONArray ja = this.ja;
-
         for (int i = 0; i < ja.size(); i++)
         {
             JSONObject j = (JSONObject) ja.get(i);

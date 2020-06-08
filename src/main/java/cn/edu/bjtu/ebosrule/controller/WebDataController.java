@@ -1,5 +1,6 @@
 package cn.edu.bjtu.ebosrule.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,7 @@ public class WebDataController {
     @CrossOrigin
     @PostMapping("/webdata")
     public String Webdata(@RequestBody JSONObject info){
+        System.out.println("webdata收到的++++++"+info);
         int threshold = info.getIntValue("ruleParaThreshold");
         String name = info.getString("rulePara");
         String symbol = info.getString("ruleJudge");
@@ -48,6 +50,8 @@ public class WebDataController {
         String symbol3 = info.getString("ruleJudge3");
         String logic2 = info.getString("logic2");
         String logic3 = info.getString("logic3");
+        JSONArray otherRules = info.getJSONArray("otherRules");
+        System.out.println("+++并行的规则是+++"+otherRules);
 
         for (int i = 0; i<10; i++)
             if (this.parameterName[i] == null)
