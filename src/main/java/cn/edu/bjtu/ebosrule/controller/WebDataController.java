@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 
 public class WebDataController {
-
     public static String [] parameterName = new String[10];
     public static int [] threshold= new int [10];
     public static String [] symbol= new String[10];
@@ -28,10 +27,15 @@ public class WebDataController {
     public static String [] logic2 = new String[10];
     public static String [] logic3 = new String[10];
 
+    public static String [][] otherLogic;
+    public static int [][] otherThreshold;
+    public static String [][] otherSymbol;
+    public static String [][] otherDevice;
+    public static String [][] otherParameterName;
+
     @CrossOrigin
     @PostMapping("/webdata")
     public String Webdata(@RequestBody JSONObject info){
-        System.out.println("webdata收到的++++++"+info);
         int threshold = info.getIntValue("ruleParaThreshold");
         String name = info.getString("rulePara");
         String symbol = info.getString("ruleJudge");
@@ -39,19 +43,14 @@ public class WebDataController {
         String service = info.getString("service");
         String ruleName = info.getString("ruleName");
         String device = info.getString("device");
-        String device2 = info.getString("device2");
-        String device3 = info.getString("device3");
         String scenario = info.getString("scenario");
-        int threshold2 = info.getIntValue("ruleParaThreshold2");
-        String name2 = info.getString("rulePara2");
-        String symbol2 = info.getString("ruleJudge2");
-        int threshold3 = info.getIntValue("ruleParaThreshold3");
-        String name3 = info.getString("rulePara3");
-        String symbol3 = info.getString("ruleJudge3");
-        String logic2 = info.getString("logic2");
-        String logic3 = info.getString("logic3");
         JSONArray otherRules = info.getJSONArray("otherRules");
-        System.out.println("+++并行的规则是+++"+otherRules);
+        int otherRulesLen = otherRules.size();
+        this.otherDevice = new String [10][otherRulesLen];
+        this.otherSymbol = new String [10][otherRulesLen];
+        this.otherThreshold = new int [10][otherRulesLen];
+        this.otherLogic = new String [10][otherRulesLen];
+        this.otherParameterName = new String [10][otherRulesLen];
 
         for (int i = 0; i<10; i++)
             if (this.parameterName[i] == null)
@@ -63,17 +62,14 @@ public class WebDataController {
                 this.service[i] = service;
                 this.ruleName[i] = ruleName;
                 this.device[i] = device;
-                this.device2[i] = device2;
-                this.device3[i] = device3;
                 this.scenario[i] = scenario;
-                this.parameterName2[i] = name2;
-                this.threshold2[i] = threshold2;
-                this.symbol2[i] = symbol2;
-                this.parameterName3[i] = name3;
-                this.threshold3[i] = threshold3;
-                this.symbol3[i] = symbol3;
-                this.logic2[i] = logic2;
-                this.logic3[i] = logic3;
+                for(int j=0; j<otherRulesLen; j++){
+                    this.otherDevice [i][j] = otherRules.getJSONObject(j).getString("device");
+                    this.otherSymbol [i][j] = otherRules.getJSONObject(j).getString("ruleJudge");
+                    this.otherThreshold [i][j] = otherRules.getJSONObject(j).getIntValue("ruleParaThreshold");
+                    this.otherLogic [i][j] = otherRules.getJSONObject(j).getString("logic");
+                    this.otherParameterName [i][j] = otherRules.getJSONObject(j).getString("parameter");
+                }
                 break;
             }
         return "收到前端数据";

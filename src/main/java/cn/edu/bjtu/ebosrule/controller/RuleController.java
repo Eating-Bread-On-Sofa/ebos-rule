@@ -57,16 +57,7 @@ public class RuleController {
             j.put("service",ruleService.findAllRule().get(i).getService());
             j.put("device",ruleService.findAllRule().get(i).getDevice());
             j.put("scenario",ruleService.findAllRule().get(i).getScenario());
-            j.put("device2",ruleService.findAllRule().get(i).getDevice2());
-            j.put("parameter2",ruleService.findAllRule().get(i).getRulePara2());
-            j.put("ruleJudge2",ruleService.findAllRule().get(i).getRuleJudge2());
-            j.put("threshold2",ruleService.findAllRule().get(i).getRuleParaThreshold2());
-            j.put("device3",ruleService.findAllRule().get(i).getDevice3());
-            j.put("parameter3",ruleService.findAllRule().get(i).getRulePara3());
-            j.put("ruleJudge3",ruleService.findAllRule().get(i).getRuleJudge3());
-            j.put("threshold3",ruleService.findAllRule().get(i).getRuleParaThreshold3());
-            j.put("logic2",ruleService.findAllRule().get(i).getLogic2());
-            j.put("logic3",ruleService.findAllRule().get(i).getLogic3());
+            j.put("otherRules",ruleService.findAllRule().get(i).getOtherRules());
             ja.add(j);
         }
         this.ja=ja;
@@ -77,7 +68,6 @@ public class RuleController {
     @CrossOrigin
     @PostMapping("/ruleCreate")
     public Boolean addRule(@RequestBody Rule rule) {
-        System.out.println(rule);
         if (rule != null) {
             if (ruleService.addRule(rule)) {
                 logService.info("添加新规则"+rule.getRulePara()+rule.getRuleJudge()+rule.getRuleParaThreshold());
@@ -107,17 +97,8 @@ public class RuleController {
             String service = j.getString("service");
             String ruleName = j.getString("ruleName");
             String device = j.getString("device");
-            String device2 = j.getString("device2");
-            String device3 = j.getString("device3");
             String scenario = j.getString("scenario");
-            int threshold2 = j.getIntValue("threshold2");
-            String name2 = j.getString("parameter2");
-            String symbol2 = j.getString("ruleJudge2");
-            int threshold3 = j.getIntValue("threshold3");
-            String name3 = j.getString("parameter3");
-            String symbol3 = j.getString("ruleJudge3");
-            String logic2 = j.getString("logic2");
-            String logic3 = j.getString("logic3");
+            JSONArray otherRules = j.getJSONArray("otherRules");
 
             WebDataController.parameterName[i] = name;
             WebDataController.threshold[i] = threshold;
@@ -126,17 +107,21 @@ public class RuleController {
             WebDataController.service[i] = service;
             WebDataController.ruleName[i] = ruleName;
             WebDataController.device[i] = device;
-            WebDataController.device2[i] = device2;
-            WebDataController.device3[i] = device3;
             WebDataController.scenario[i] = scenario;
-            WebDataController.parameterName2[i] = name2;
-            WebDataController.threshold2[i] = threshold2;
-            WebDataController.symbol2[i] = symbol2;
-            WebDataController.parameterName3[i] = name3;
-            WebDataController.threshold3[i] = threshold3;
-            WebDataController.symbol3[i] = symbol3;
-            WebDataController.logic2[i] = logic2;
-            WebDataController.logic3[i] = logic3;
+
+            int otherRulesLen = otherRules.size();
+            WebDataController.otherDevice = new String [10][otherRulesLen];
+            WebDataController.otherSymbol = new String [10][otherRulesLen];
+            WebDataController.otherThreshold = new int [10][otherRulesLen];
+            WebDataController.otherLogic = new String [10][otherRulesLen];
+            WebDataController.otherParameterName = new String [10][otherRulesLen];
+            for(int k=0; k<otherRulesLen; k++) {
+                WebDataController.otherDevice[i][k] = otherRules.getJSONObject(k).getString("device");
+                WebDataController.otherSymbol[i][k] = otherRules.getJSONObject(k).getString("ruleJudge");
+                WebDataController.otherThreshold[i][k] = otherRules.getJSONObject(k).getIntValue("ruleParaThreshold");
+                WebDataController.otherLogic[i][k] = otherRules.getJSONObject(k).getString("logic");
+                WebDataController.otherParameterName[i][k] = otherRules.getJSONObject(k).getString("parameter");
+            }
         }
     }
 
