@@ -50,8 +50,12 @@ public class LogsController {
 
     @CrossOrigin
     @RequestMapping(value = "/log",method = RequestMethod.GET)
-    public JSONArray logTest( Date date1, Date date2, String source, String category){
-        return logService.find(date1, date2, source, category);
+    public JSONArray logTest( Date date1, Date date2, String source, String category) throws ParseException {
+        SimpleDateFormat df =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat ds =  new SimpleDateFormat("yyyy-MM-dd ");
+        Date startDate = df.parse(ds.format(date1)+"00:00:00");
+        Date endDate = df.parse(ds.format(date2)+"23:59:59");
+        return logService.find(startDate, endDate, source, category);
     }
 
     @CrossOrigin
