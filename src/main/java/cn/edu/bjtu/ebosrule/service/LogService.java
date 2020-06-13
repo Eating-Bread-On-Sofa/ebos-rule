@@ -15,11 +15,17 @@ public interface LogService {
 
     void error(String message);
 
+    void create(String message);
+
+    void delete(String message);
+
+    void update(String message);
+
+    void retrieve(String message);
+
     String getTop();
 
     JSONArray findAll();
-
-    JSONArray find(Date date1,Date date2,String source,String category);
 
     JSONArray findLogByCategory(String category);
 

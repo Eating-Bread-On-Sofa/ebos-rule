@@ -59,6 +59,46 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
+    public void create(String message) {
+        Log log = new Log();
+        log.setDate(new Date());
+        log.setSource(serviceName);
+        log.setFunction("create");
+        log.setMessage(message);
+        mongoTemplate.save(log);
+    }
+
+    @Override
+    public void delete(String message) {
+        Log log = new Log();
+        log.setDate(new Date());
+        log.setSource(serviceName);
+        log.setFunction("detele");
+        log.setMessage(message);
+        mongoTemplate.save(log);
+    }
+
+    @Override
+    public void update(String message) {
+        Log log = new Log();
+        log.setDate(new Date());
+        log.setSource(serviceName);
+        log.setFunction("update");
+        log.setMessage(message);
+        mongoTemplate.save(log);
+    }
+
+    @Override
+    public void retrieve(String message) {
+        Log log = new Log();
+        log.setDate(new Date());
+        log.setSource(serviceName);
+        log.setFunction("retrieve");
+        log.setMessage(message);
+        mongoTemplate.save(log);
+    }
+
+    @Override
     public JSONArray findAll(){
         List<Log> list = mongoTemplate.findAll(Log.class,"log");
         return list2json(list);
@@ -81,31 +121,6 @@ public class LogServiceImpl implements LogService {
         Query query = Query.query(Criteria.where("source").is(source).and("category").is(category));
         List<Log> list = mongoTemplate.find(query,Log.class,"log");
         return list2json(list);
-    }
-
-    @Override
-    public JSONArray find(Date date1,Date date2,String source,String category){
-        if (source.equals("全部")){
-            if (category.equals("全部")){
-                Query query = Query.query(Criteria.where("date").gte(date1).lte(date2));
-                List<Log> list = mongoTemplate.find(query,Log.class,"log");
-                return list2json(list);
-            }else{
-                Query query = Query.query(Criteria.where("date").gte(date1).lte(date2).and("category").is(category));
-                List<Log> list = mongoTemplate.find(query,Log.class,"log");
-                return list2json(list);
-            }
-        }else{
-            if (category.equals("全部")){
-                Query query = Query.query(Criteria.where("date").gte(date1).lte(date2).and("source").is(source));
-                List<Log> list = mongoTemplate.find(query,Log.class,"log");
-                return list2json(list);
-            }else{
-                Query query = Query.query(Criteria.where("date").gte(date1).lte(date2).and("category").is(category).and("source").is(source));
-                List<Log> list = mongoTemplate.find(query,Log.class,"log");
-                return list2json(list);
-            }
-        }
     }
 
     @Override
