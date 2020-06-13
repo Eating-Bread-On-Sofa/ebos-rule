@@ -125,4 +125,24 @@ public class RuleController {
         }
     }
 
+    @CrossOrigin
+    @RequestMapping ("/logtest")
+    public String logTest(){
+        logService.debug("gwinst1");
+        logService.info("gwinst2");
+        logService.warn("gwinst3");
+        logService.error("gwinst4");
+        logService.create("增");
+        logService.delete("删");
+        logService.update("改");
+        logService.retrieve("查");
+        return "成功";
+    }
+
+    @CrossOrigin
+    @GetMapping("/logtest")
+    public JSONArray loggerTest(){
+        return logService.findAll();
+    }
+
 }
