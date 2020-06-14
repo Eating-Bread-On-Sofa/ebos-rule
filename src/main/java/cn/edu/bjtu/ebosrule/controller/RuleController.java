@@ -1,5 +1,6 @@
 package cn.edu.bjtu.ebosrule.controller;
 
+import cn.edu.bjtu.ebosrule.entity.Log;
 import cn.edu.bjtu.ebosrule.service.LogService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -141,7 +142,7 @@ public class RuleController {
 
     @CrossOrigin
     @GetMapping("/logtest")
-    public JSONArray loggerTest(){
+    public List<Log> loggerTest(){
         return logService.findAll();
     }
 
