@@ -1,5 +1,6 @@
 package cn.edu.bjtu.ebosrule.controller;
 
+import cn.edu.bjtu.ebosrule.entity.Log;
 import cn.edu.bjtu.ebosrule.service.LogService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -84,7 +85,7 @@ public class RuleController {
     public Boolean addRule(@RequestBody Rule rule) {
         if (rule != null) {
             if (ruleService.addRule(rule)) {
-                logService.info("添加新规则"+rule.getRulePara()+rule.getRuleJudge()+rule.getRuleParaThreshold());
+                logService.info("create","添加新规则"+rule.getRulePara()+rule.getRuleJudge()+rule.getRuleParaThreshold());
                 return true;
             }
         }
@@ -142,20 +143,20 @@ public class RuleController {
     @CrossOrigin
     @RequestMapping ("/logtest")
     public String logTest(){
-        logService.debug("gwinst1");
-        logService.info("gwinst2");
-        logService.warn("gwinst3");
-        logService.error("gwinst4");
-        logService.create("增");
-        logService.delete("删");
-        logService.update("改");
-        logService.retrieve("查");
+        logService.debug("create","gwinst1");
+        logService.info("delete","gwinst2");
+        logService.warn("update","gwinst3");
+        logService.error("retrieve","gwinst4");
+        logService.debug("retrieve","增");
+        logService.info("update","删");
+        logService.warn("delete","改");
+        logService.error("create","查");
         return "成功";
     }
 
     @CrossOrigin
     @GetMapping("/logtest")
-    public JSONArray loggerTest(){
+    public List<Log> loggerTest(){
         return logService.findAll();
     }
 

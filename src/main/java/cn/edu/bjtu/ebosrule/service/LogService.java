@@ -1,36 +1,38 @@
 package cn.edu.bjtu.ebosrule.service;
 
-import com.alibaba.fastjson.JSONArray;
+import cn.edu.bjtu.ebosrule.entity.Log;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public interface LogService {
-    void debug(String message);
+    void debug(String operation,String message);
 
-    void info(String message);
+    void info(String operation,String message);
 
-    void warn(String message);
+    void warn(String operation,String message);
 
-    void error(String message);
+    void error(String operation,String message);
 
-    void create(String message);
+    void write(String category,String operation,String message);
 
-    void delete(String message);
+    List<Log> findAll();
 
-    void update(String message);
+    List<Log> find(Date startDate, Date endDate, String source, String category, String operation);
 
-    void retrieve(String message);
+    List<Log> findLogByCategory(String category);
 
-    String getTop();
+    List<Log> findLogBySource(String source);
 
-    JSONArray findAll();
+    List<Log> findLogByOperation(String operation);
 
-    JSONArray findLogByCategory(String category);
+    List<Log> findLogByDate(Date startDate, Date endDate);
 
-    JSONArray findLogBySource(String source);
+    List<Log> findLogBySourceAndDate(Date startDate, Date endDate,String source);
 
-    JSONArray findLogBySourceAndCategory(String source, String category);
+    List<Log> findLogBySourceAndCategory(String source, String category);
 
+    List<Log> findLogBySourceAndOperation(String source, String operation);
 }
