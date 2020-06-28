@@ -1,5 +1,6 @@
 package cn.edu.bjtu.ebosrule.controller;
 
+import cn.edu.bjtu.ebosrule.entity.Rule;
 import cn.edu.bjtu.ebosrule.service.InitListener;
 import cn.edu.bjtu.ebosrule.service.MqFactory;
 import cn.edu.bjtu.ebosrule.service.MqProducer;
@@ -162,7 +163,7 @@ public class TerminalDataController {
         {
             System.out.println("++++++报警了++++++++++");
             if (flag1!=0){
-                content+=name+symbol+OutThreshold+",";
+                content+=device+name+symbol+OutThreshold+",";
             }
             for(int j=0; j<len; j++){
                 if (flag[j]!=0){
@@ -173,6 +174,10 @@ public class TerminalDataController {
             alert.put("type","alert");
             alert.put("message",content+"!");
             alert.put("source",ruleName);
+
+            RuleController.alertFlag = true;
+            RuleController.alertMsg = content;
+
 
             if(operation.equals("告警") || operation.equals("警告且操作设备"))
                 mqProducer.publish("notice",alert.toString());

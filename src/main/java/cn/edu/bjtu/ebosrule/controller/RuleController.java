@@ -33,6 +33,9 @@ public class RuleController {
     private String ip;
     JSONArray ja = new JSONArray();
 
+    public static String alertMsg;
+    public static Boolean alertFlag;
+
     @CrossOrigin
     @GetMapping("/rules")
     public LayuiTableResultUtil<List<Rule>> Rules(@RequestParam Integer page, @RequestParam Integer limit) {
@@ -63,6 +66,17 @@ public class RuleController {
         this.ja=ja;
         this.loadRule();
         return ja;
+    }
+
+    @CrossOrigin
+    @GetMapping("/ruleAlert")
+    public JSONObject getruleAlertRule(){
+        JSONObject j=new JSONObject();
+        j.put("alertFlag",this.alertFlag);
+        j.put("alertMsg",this.alertMsg);
+        this.alertFlag = false;
+        this.alertMsg = "";
+        return j;
     }
 
     @CrossOrigin
