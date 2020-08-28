@@ -61,5 +61,4 @@ public class LayuiTableResultUtil<T> {
         return "LayuiTableResult [msg=" + msg + ", data=" + data + ", code=" + code + ", count=" + count + "]";
     }
 
-
 }

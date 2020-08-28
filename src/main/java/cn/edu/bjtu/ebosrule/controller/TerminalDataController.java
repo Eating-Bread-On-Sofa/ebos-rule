@@ -1,10 +1,7 @@
 package cn.edu.bjtu.ebosrule.controller;
 
-import cn.edu.bjtu.ebosrule.entity.Rule;
-import cn.edu.bjtu.ebosrule.service.InitListener;
 import cn.edu.bjtu.ebosrule.service.MqFactory;
 import cn.edu.bjtu.ebosrule.service.MqProducer;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import cn.edu.bjtu.ebosrule.entity.Terminal;
 import org.junit.Test;
@@ -12,14 +9,10 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.annotation.JmsListener;
 import org.springframework.web.bind.annotation.*;
-
 
 @RequestMapping("/api")
 @RestController
-
-
 public class TerminalDataController {
     @Autowired
     MqFactory mqFactory;
@@ -37,7 +30,6 @@ public class TerminalDataController {
         mqFactory.createProducer().publish("rules_terminal",json1.toString());
         return "发送成功";
     }
-
 
     @Test
     public void Test() {

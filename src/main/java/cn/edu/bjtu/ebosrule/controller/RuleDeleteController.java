@@ -5,14 +5,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api")
 @RestController
-
 public class RuleDeleteController {
 
     public static String [] ruleName= new String[10];
 
     @CrossOrigin
     @PostMapping("/ruleDelete")
-
     //清空内存中的数据
     public void ruleDelete(@RequestBody JSONObject info)
     {

@@ -1,7 +1,6 @@
 package cn.edu.bjtu.ebosrule.service;
 
 import cn.edu.bjtu.ebosrule.controller.TerminalDataController;
-import cn.edu.bjtu.ebosrule.controller.WebDataController;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -12,9 +11,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import javax.sound.midi.Track;
-
-
 @Component
 @Order(1)
 public class InitListener implements ApplicationRunner {
@@ -24,8 +20,6 @@ public class InitListener implements ApplicationRunner {
     TerminalDataController terminalDataController;
     @Value("${mq}")
     private String name;
-
-
 
     @Override
     public void run(ApplicationArguments arguments) {

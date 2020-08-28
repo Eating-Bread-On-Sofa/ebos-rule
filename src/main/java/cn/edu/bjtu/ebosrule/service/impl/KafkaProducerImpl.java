@@ -19,5 +19,4 @@ public class KafkaProducerImpl implements MqProducer {
         System.out.println("kafka发布"+topic+"消息 " + message);
         kafkaTemplate.send(topic,message);
     }
-
 }

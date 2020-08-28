@@ -37,7 +37,6 @@ public class Rule {
     }
     public String getDevice() { return device; }
 
-
     public String getScenario() { return scenario; }
     public void setService(String service) {
         this.service = service;
@@ -82,7 +81,6 @@ public class Rule {
     public void setRuleToFunction(String ruleToFunction) {
         this.ruleToFunction = ruleToFunction;
     }
-
 
     public int getRuleStatus() { return ruleStatus; }
     public void setRuleExecute(String ruleExecute) {this.ruleExecute = ruleExecute; }

@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api")
 @RestController
-
-
 public class RuleEditController {
     public static String [] ruleName= new String[10];
 

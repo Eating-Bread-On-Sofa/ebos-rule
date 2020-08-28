@@ -1,23 +1,25 @@
 package cn.edu.bjtu.ebosrule.controller;
 
 import cn.edu.bjtu.ebosrule.entity.Log;
-import cn.edu.bjtu.ebosrule.service.LogService;
+import cn.edu.bjtu.ebosrule.service.*;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import cn.edu.bjtu.ebosrule.dao.RuleRepository;
 import cn.edu.bjtu.ebosrule.entity.Rule;
-import cn.edu.bjtu.ebosrule.service.RuleService;
 import cn.edu.bjtu.ebosrule.util.LayuiTableResultUtil;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-
+import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @RequestMapping("/api")
 @RestController
@@ -27,9 +29,15 @@ public class RuleController {
     @Autowired
     RuleRepository ruleRepository;
     @Autowired
-    private RestTemplate restTemplate;
-    @Autowired
     LogService logService;
+    @Autowired
+    SubscribeService subscribeService;
+    @Autowired
+    MqFactory mqFactory;
+
+    public static final List<RawSubscribe> status = new LinkedList<>();
+    private ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1, 50,3, TimeUnit.SECONDS,new SynchronousQueue<>());
+
     @Value("${server.edgex}")
     private String ip;
     JSONArray ja = new JSONArray();
@@ -160,4 +168,64 @@ public class RuleController {
         return logService.findAll();
     }
 
+    @ApiOperation(value = "微服务订阅mq的主题")
+    @CrossOrigin
+    @PostMapping("/subscribe")
+    public String newSubscribe(RawSubscribe rawSubscribe){
+        if(!RuleController.check(rawSubscribe.getSubTopic())){
+            try{
+                status.add(rawSubscribe);
+                subscribeService.save(rawSubscribe.getSubTopic());
+                threadPoolExecutor.execute(rawSubscribe);
+                logService.info(null,"设备管理微服务订阅topic：" + rawSubscribe.getSubTopic());
+                return "订阅成功";
+            }catch (Exception e) {
+                e.printStackTrace();
+                return "参数错误!";
+            }
+        }else {
+            return "订阅主题重复";
+        }
+    }
+
+    public static boolean check(String subTopic){
+        boolean flag = false;
+        for (RawSubscribe rawSubscribe : status) {
+            if(subTopic.equals(rawSubscribe.getSubTopic())){
+                flag=true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    @ApiOperation(value = "删除微服务订阅mq的主题")
+    @CrossOrigin
+    @DeleteMapping("/subscribe/{subTopic}")
+    public boolean delete(@PathVariable String subTopic){
+        boolean flag;
+        synchronized (status){
+            flag = status.remove(search(subTopic));
+        }
+        logService.info(null,"删除设备管理上topic为"+subTopic+"的订阅");
+        return flag;
+    }
+
+    public static RawSubscribe search(String subTopic){
+        for (RawSubscribe rawSubscribe : status) {
+            if(subTopic.equals(rawSubscribe.getSubTopic())){
+                return rawSubscribe;
+            }
+        }
+        return null;
+    }
+
+    @ApiOperation(value = "微服务向mq的某主题发布消息")
+    @CrossOrigin
+    @PostMapping("/publish")
+    public String publish(@RequestParam(value = "topic") String topic,@RequestParam(value = "message") String message){
+        MqProducer mqProducer = mqFactory.createProducer();
+        mqProducer.publish(topic,message);
+        return "发布成功";
+    }
 }

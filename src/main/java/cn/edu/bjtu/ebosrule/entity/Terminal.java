@@ -4,7 +4,6 @@ import cn.edu.bjtu.ebosrule.controller.TerminalDataController;
 import lombok.Data;
 
 @Data
-
 public class Terminal {
 
     private int flag = 0;
@@ -62,7 +61,6 @@ public class Terminal {
         return drools_scenario1;
     }
     public String setDrools_scenario1(String str) { drools_scenario1=str; return drools_scenario1;}
-
 
     int terminal_value_temp=TerminalDataController.value_temp;
     int terminal_value_wet=TerminalDataController.value_wet;
