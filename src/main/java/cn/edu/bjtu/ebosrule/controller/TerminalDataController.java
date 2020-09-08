@@ -123,7 +123,7 @@ public class TerminalDataController {
                         if (this.value_temp<otherThreshold[i]){ flag[i] = 1; }
                     }
                 }
-                else if(otherSymbol[i].equals("湿度")){
+                else if(otherParameterName[i].equals("湿度")){
                     if(otherSymbol[i].equals(">")){
                         if (this.value_wet>otherThreshold[i]){ flag[i] = 1; }
                     }
@@ -150,7 +150,7 @@ public class TerminalDataController {
         }
 
         if (Flag!=0) {
-            System.out.println("++++++报警了++++++++++");
+            System.out.println("----------------------------------报警了--------------------------------------");
             flagMsg += "第1个：" + flag1 + "---  ";
             if (flag1!=0){
                 content+=device+name+symbol+OutThreshold+",";
@@ -170,8 +170,7 @@ public class TerminalDataController {
             RuleController.alertMsg = content;
 
             System.out.println("告警信息是:" + RuleController.alertMsg);
-            System.out.println("告警标志位是:" + flagMsg);
-            System.out.println("最后的标志位是——————————————————————:" + Flag);
+            System.out.println("告警标志位是:" + flagMsg + "——————————最后的标志位是————————————:" + Flag);
 
             if(operation.equals("告警") || operation.equals("警告且操作设备"))
                 mqProducer.publish("notice",alert.toString());
