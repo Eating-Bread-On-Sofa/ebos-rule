@@ -36,6 +36,7 @@ public class WebDataController {
     @CrossOrigin
     @PostMapping("/webdata")
     public String Webdata(@RequestBody JSONObject info){
+        System.out.println("Web页面++++++++++++++++++++++++++++");
         int threshold = info.getIntValue("ruleParaThreshold");
         String name = info.getString("rulePara");
         String symbol = info.getString("ruleJudge");
@@ -51,6 +52,8 @@ public class WebDataController {
         this.otherThreshold = new int [10][otherRulesLen];
         this.otherLogic = new String [10][otherRulesLen];
         this.otherParameterName = new String [10][otherRulesLen];
+
+        System.out.println("Web页面" + ruleName);
 
         for (int i = 0; i<10; i++)
             if (this.parameterName[i] == null)
