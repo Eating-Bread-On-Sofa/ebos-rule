@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -42,8 +43,9 @@ public class RuleController {
     private String ip;
     JSONArray ja = new JSONArray();
 
-    public static String alertMsg;
+    public static String  alertMsg;
     public static Boolean alertFlag;
+    public static List<String> alertList = new ArrayList<String>();
 
     @CrossOrigin
     @GetMapping("/rules")
@@ -81,10 +83,13 @@ public class RuleController {
     @GetMapping("/ruleAlert")
     public JSONObject getruleAlertRule(){
         JSONObject j=new JSONObject();
-        j.put("alertFlag",this.alertFlag);
-        j.put("alertMsg",this.alertMsg);
-        this.alertFlag = false;
-        this.alertMsg = "";
+//        j.put("alertFlag",this.alertFlag);
+//        j.put("alertMsg",this.alertMsg);
+//        this.alertFlag = false;
+//        this.alertMsg = "";
+
+        j.put("alertList", RuleController.alertList);
+        System.out.println("ruleAlert拉取的告警信息—++++++++++++++++++++++++++" + j);
         return j;
     }
 
