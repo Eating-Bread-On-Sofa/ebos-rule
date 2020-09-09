@@ -11,6 +11,7 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 @RequestMapping("/api")
 @RestController
 public class TerminalDataController {
@@ -105,7 +106,6 @@ public class TerminalDataController {
 
         kieSession.dispose();
 
-        System.out.println("ArrayList。。。。。。。。。。。。。。。。。。。。。" + RuleController.alertList);
     }
     public void ruleTemplate (int index, String ruleName,int OutThreshold,String name,String symbol,String operation,String service, String device, int flag1, String[] otherLogic, String[] otherParameterName, String[] otherSymbol, int[] otherThreshold, String[] otherDevice)
     {
@@ -152,7 +152,7 @@ public class TerminalDataController {
         }
 
         if (Flag!=0) {
-            System.out.println("----------------------------------报警了--------------------------------------");
+            System.out.println("--------------------------------------报警了--------------------------------------------");
             flagMsg += "第1个：" + flag1 + "---  ";
             if (flag1!=0){
                 content+=device+name+symbol+OutThreshold+",";
@@ -170,16 +170,16 @@ public class TerminalDataController {
             alert.put("message",content+"!");
             alert.put("source",ruleName);
 
-            RuleController.alertFlag = true;
-            RuleController.alertMsg = content;
-
-            System.out.println("告警信息是:" + RuleController.alertMsg);
             System.out.println("告警标志位是:" + flagMsg + "——————————最后的标志位是————————————:" + Flag);
 
-            if(operation.equals("告警") || operation.equals("警告且操作设备")){
+            if(operation.equals("告警") || operation.equals("告警且操作设备")){
                 mqProducer.publish("notice",alert.toString());
-                if(!RuleController.alertList.contains(content)){
-                    RuleController.alertList.add(content);
+                System.out.println(index);
+                System.out.println(RuleController.arrFlag[index]);
+                System.out.println(RuleController.arrMsg[index]);
+                if(!RuleController.arrFlag[index]) {
+                    RuleController.arrFlag[index] = true;
+                    RuleController.arrMsg[index] = content;
                 }
             }
 
@@ -189,6 +189,9 @@ public class TerminalDataController {
                 json.put("name",service);
                 mqProducer.publish("run.command",json.toString());
             }
+        } else{
+            RuleController.arrFlag[index] = false;
+            RuleController.arrMsg[index] = "";
         }
     }
     public void terminalTemplate(Terminal t, int threshold1, String parameterName1, String symbol1, String operation, String scenario, int threshold2, String parameterName2, String symbol2, int threshold3, String parameterName3, String symbol3)

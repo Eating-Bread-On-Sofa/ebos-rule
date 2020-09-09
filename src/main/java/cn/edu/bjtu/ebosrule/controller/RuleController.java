@@ -43,9 +43,9 @@ public class RuleController {
     private String ip;
     JSONArray ja = new JSONArray();
 
-    public static String  alertMsg;
-    public static Boolean alertFlag;
-    public static List<String> alertList = new ArrayList<String>();
+    public static String[] arrMsg = {"","","","","","","","","",""};
+    public static Boolean[] arrFlag = {false,false,false,false,false,false,false,false,false,false};
+
 
     @CrossOrigin
     @GetMapping("/rules")
@@ -83,12 +83,15 @@ public class RuleController {
     @GetMapping("/ruleAlert")
     public JSONObject getruleAlertRule(){
         JSONObject j=new JSONObject();
-//        j.put("alertFlag",this.alertFlag);
-//        j.put("alertMsg",this.alertMsg);
-//        this.alertFlag = false;
-//        this.alertMsg = "";
 
-        j.put("alertList", RuleController.alertList);
+        ArrayList<String> al = new ArrayList<String>();
+        for(int i=0; i<10; i++){
+            if(arrFlag[i]){
+                al.add(arrMsg[i]);
+            }
+        }
+
+        j.put("alertList", al);
         System.out.println("ruleAlert拉取的告警信息—++++++++++++++++++++++++++" + j);
         return j;
     }
