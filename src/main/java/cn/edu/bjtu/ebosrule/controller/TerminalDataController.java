@@ -106,6 +106,18 @@ public class TerminalDataController {
 
         kieSession.dispose();
 
+        kieSession = null;
+        terminal0 = null;
+        terminal1 = null;
+        terminal2 = null;
+        terminal3 = null;
+        terminal4 = null;
+        terminal5 = null;
+        terminal6 = null;
+        terminal7 = null;
+        terminal8 = null;
+        terminal9 = null;
+
     }
     public void ruleTemplate (int index, String ruleName,int OutThreshold,String name,String symbol,String operation,String service, String device, int flag1, String[] otherLogic, String[] otherParameterName, String[] otherSymbol, int[] otherThreshold, String[] otherDevice)
     {
