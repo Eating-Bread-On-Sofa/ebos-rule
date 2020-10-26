@@ -118,6 +118,7 @@ public class TerminalDataController {
         terminal7 = null;
         terminal8 = null;
         terminal9 = null;
+
     }
     public void ruleTemplate (int index,String gateway, String ruleName,int OutThreshold,String name,String symbol,String operation,String service, String device, int flag1, String[] otherLogic, String[] otherParameterName, String[] otherSymbol, int[] otherThreshold, String[] otherDevice)
     {
