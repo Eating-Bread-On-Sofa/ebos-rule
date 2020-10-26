@@ -36,7 +36,6 @@ public class RuleServiceImpl implements RuleService {
             rule1.setRuleCreateTime(objectId.getDate());
             ruleRepository.save(rule1);
             return true;
-
         } else {
             return false;
         }

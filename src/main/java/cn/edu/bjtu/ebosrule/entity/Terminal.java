@@ -19,6 +19,7 @@ public class Terminal {
     private int drools_threshold3;
     private String drools_parameterName3;
     private String drools_symbol3;
+    private String [] drools_symbol = new String[10];
 
     public int getDrools_threshold1() {
         return drools_threshold1;
@@ -52,6 +53,11 @@ public class Terminal {
         return drools_symbol1;
     }
     public String setDrools_symbol3(String str) { drools_symbol3=str; return drools_symbol3;}
+
+    public String[] getDrools_symbol() {
+        return drools_symbol;
+    }
+    public String[] setDrools_symbol(String[] arr) { drools_symbol=arr; return drools_symbol;}
 
     public String getDrools_operation1() {
         return drools_operation1;

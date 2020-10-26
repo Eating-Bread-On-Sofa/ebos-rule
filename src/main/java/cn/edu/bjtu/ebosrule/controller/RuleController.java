@@ -46,6 +46,14 @@ public class RuleController {
     public static String[] arrMsg = {"","","","","","","","","",""};
     public static Boolean[] arrFlag = {false,false,false,false,false,false,false,false,false,false};
 
+    @CrossOrigin
+    @PostMapping("/ruleReceive")
+    public String ruleReceive(@RequestBody JSONObject info) {
+        System.out.println(info);
+        ja.add(info);
+        this.loadRule();
+        return "收到";
+    }
 
     @CrossOrigin
     @GetMapping("/rules")
@@ -71,6 +79,7 @@ public class RuleController {
             j.put("service",ruleService.findAllRule().get(i).getService());
             j.put("device",ruleService.findAllRule().get(i).getDevice());
             j.put("scenario",ruleService.findAllRule().get(i).getScenario());
+            j.put("gateway",ruleService.findAllRule().get(i).getGateway());
             j.put("otherRules",ruleService.findAllRule().get(i).getOtherRules());
             ja.add(j);
         }
@@ -81,16 +90,14 @@ public class RuleController {
 
     @CrossOrigin
     @GetMapping("/ruleAlert")
-    public JSONObject getruleAlertRule(){
+    public JSONObject getRuleAlert(){
         JSONObject j=new JSONObject();
-
         ArrayList<String> al = new ArrayList<String>();
         for(int i=0; i<10; i++){
             if(arrFlag[i]){
                 al.add(arrMsg[i]);
             }
         }
-
         j.put("alertList", al);
         System.out.println("ruleAlert拉取的告警信息—++++++++++++++++++++++++++" + j);
         return j;
@@ -99,7 +106,7 @@ public class RuleController {
     @CrossOrigin
     @PostMapping("/ruleCreate")
     public Boolean addRule(@RequestBody Rule rule) {
-        System.out.println("ruleCreate");
+        System.out.println(rule);
         if (rule != null) {
             if (ruleService.addRule(rule)) {
                 logService.info("create","添加新规则"+rule.getRulePara()+rule.getRuleJudge()+rule.getRuleParaThreshold());
@@ -130,6 +137,7 @@ public class RuleController {
             String ruleName = j.getString("ruleName");
             String device = j.getString("device");
             String scenario = j.getString("scenario");
+            String gateway = j.getString("gateway");
             JSONArray otherRules = j.getJSONArray("otherRules");
 
             WebDataController.parameterName[i] = name;
@@ -139,6 +147,7 @@ public class RuleController {
             WebDataController.service[i] = service;
             WebDataController.ruleName[i] = ruleName;
             WebDataController.device[i] = device;
+            WebDataController.gateway[i] = gateway;
             WebDataController.scenario[i] = scenario;
 
             int otherRulesLen = otherRules.size();

@@ -93,21 +93,33 @@ public class TerminalDataController {
         int flag8=terminal8.getFlag();
         int flag9=terminal9.getFlag();
 
-        ruleTemplate(0,WebDataController.ruleName[0],WebDataController.threshold[0],WebDataController.parameterName[0],WebDataController.symbol[0],WebDataController.operation[0],WebDataController.service[0],WebDataController.device[0],flag0,WebDataController.otherLogic[0],WebDataController.otherParameterName[0],WebDataController.otherSymbol[0],WebDataController.otherThreshold[0],WebDataController.otherDevice[0]);
-        ruleTemplate(1,WebDataController.ruleName[1],WebDataController.threshold[1],WebDataController.parameterName[1],WebDataController.symbol[1],WebDataController.operation[1],WebDataController.service[1],WebDataController.device[1],flag1,WebDataController.otherLogic[1],WebDataController.otherParameterName[1],WebDataController.otherSymbol[1],WebDataController.otherThreshold[1],WebDataController.otherDevice[1]);
-        ruleTemplate(2,WebDataController.ruleName[2],WebDataController.threshold[2],WebDataController.parameterName[2],WebDataController.symbol[2],WebDataController.operation[2],WebDataController.service[2],WebDataController.device[2],flag2,WebDataController.otherLogic[2],WebDataController.otherParameterName[2],WebDataController.otherSymbol[2],WebDataController.otherThreshold[2],WebDataController.otherDevice[2]);
-        ruleTemplate(3,WebDataController.ruleName[3],WebDataController.threshold[3],WebDataController.parameterName[3],WebDataController.symbol[3],WebDataController.operation[3],WebDataController.service[3],WebDataController.device[3],flag3,WebDataController.otherLogic[3],WebDataController.otherParameterName[3],WebDataController.otherSymbol[3],WebDataController.otherThreshold[3],WebDataController.otherDevice[3]);
-        ruleTemplate(4,WebDataController.ruleName[4],WebDataController.threshold[4],WebDataController.parameterName[4],WebDataController.symbol[4],WebDataController.operation[4],WebDataController.service[4],WebDataController.device[4],flag4,WebDataController.otherLogic[4],WebDataController.otherParameterName[4],WebDataController.otherSymbol[4],WebDataController.otherThreshold[4],WebDataController.otherDevice[4]);
-        ruleTemplate(5,WebDataController.ruleName[5],WebDataController.threshold[5],WebDataController.parameterName[5],WebDataController.symbol[5],WebDataController.operation[5],WebDataController.service[5],WebDataController.device[5],flag5,WebDataController.otherLogic[5],WebDataController.otherParameterName[5],WebDataController.otherSymbol[5],WebDataController.otherThreshold[5],WebDataController.otherDevice[5]);
-        ruleTemplate(6,WebDataController.ruleName[6],WebDataController.threshold[6],WebDataController.parameterName[6],WebDataController.symbol[6],WebDataController.operation[6],WebDataController.service[6],WebDataController.device[6],flag6,WebDataController.otherLogic[6],WebDataController.otherParameterName[6],WebDataController.otherSymbol[6],WebDataController.otherThreshold[6],WebDataController.otherDevice[6]);
-        ruleTemplate(7,WebDataController.ruleName[7],WebDataController.threshold[7],WebDataController.parameterName[7],WebDataController.symbol[7],WebDataController.operation[7],WebDataController.service[7],WebDataController.device[7],flag7,WebDataController.otherLogic[7],WebDataController.otherParameterName[7],WebDataController.otherSymbol[7],WebDataController.otherThreshold[7],WebDataController.otherDevice[7]);
-        ruleTemplate(8,WebDataController.ruleName[8],WebDataController.threshold[8],WebDataController.parameterName[8],WebDataController.symbol[8],WebDataController.operation[7],WebDataController.service[8],WebDataController.device[8],flag8,WebDataController.otherLogic[8],WebDataController.otherParameterName[8],WebDataController.otherSymbol[8],WebDataController.otherThreshold[8],WebDataController.otherDevice[8]);
-        ruleTemplate(9,WebDataController.ruleName[9],WebDataController.threshold[9],WebDataController.parameterName[9],WebDataController.symbol[9],WebDataController.operation[8],WebDataController.service[9],WebDataController.device[9],flag9,WebDataController.otherLogic[9],WebDataController.otherParameterName[9],WebDataController.otherSymbol[9],WebDataController.otherThreshold[9],WebDataController.otherDevice[9]);
+        ruleTemplate(0,WebDataController.gateway[0], WebDataController.ruleName[0],WebDataController.threshold[0],WebDataController.parameterName[0],WebDataController.symbol[0],WebDataController.operation[0],WebDataController.service[0],WebDataController.device[0],flag0,WebDataController.otherLogic[0],WebDataController.otherParameterName[0],WebDataController.otherSymbol[0],WebDataController.otherThreshold[0],WebDataController.otherDevice[0]);
+        ruleTemplate(1,WebDataController.gateway[1], WebDataController.ruleName[1],WebDataController.threshold[1],WebDataController.parameterName[1],WebDataController.symbol[1],WebDataController.operation[1],WebDataController.service[1],WebDataController.device[1],flag1,WebDataController.otherLogic[1],WebDataController.otherParameterName[1],WebDataController.otherSymbol[1],WebDataController.otherThreshold[1],WebDataController.otherDevice[1]);
+        ruleTemplate(2,WebDataController.gateway[2], WebDataController.ruleName[2],WebDataController.threshold[2],WebDataController.parameterName[2],WebDataController.symbol[2],WebDataController.operation[2],WebDataController.service[2],WebDataController.device[2],flag2,WebDataController.otherLogic[2],WebDataController.otherParameterName[2],WebDataController.otherSymbol[2],WebDataController.otherThreshold[2],WebDataController.otherDevice[2]);
+        ruleTemplate(3,WebDataController.gateway[3], WebDataController.ruleName[3],WebDataController.threshold[3],WebDataController.parameterName[3],WebDataController.symbol[3],WebDataController.operation[3],WebDataController.service[3],WebDataController.device[3],flag3,WebDataController.otherLogic[3],WebDataController.otherParameterName[3],WebDataController.otherSymbol[3],WebDataController.otherThreshold[3],WebDataController.otherDevice[3]);
+        ruleTemplate(4,WebDataController.gateway[4], WebDataController.ruleName[4],WebDataController.threshold[4],WebDataController.parameterName[4],WebDataController.symbol[4],WebDataController.operation[4],WebDataController.service[4],WebDataController.device[4],flag4,WebDataController.otherLogic[4],WebDataController.otherParameterName[4],WebDataController.otherSymbol[4],WebDataController.otherThreshold[4],WebDataController.otherDevice[4]);
+        ruleTemplate(5,WebDataController.gateway[5], WebDataController.ruleName[5],WebDataController.threshold[5],WebDataController.parameterName[5],WebDataController.symbol[5],WebDataController.operation[5],WebDataController.service[5],WebDataController.device[5],flag5,WebDataController.otherLogic[5],WebDataController.otherParameterName[5],WebDataController.otherSymbol[5],WebDataController.otherThreshold[5],WebDataController.otherDevice[5]);
+        ruleTemplate(6,WebDataController.gateway[6], WebDataController.ruleName[6],WebDataController.threshold[6],WebDataController.parameterName[6],WebDataController.symbol[6],WebDataController.operation[6],WebDataController.service[6],WebDataController.device[6],flag6,WebDataController.otherLogic[6],WebDataController.otherParameterName[6],WebDataController.otherSymbol[6],WebDataController.otherThreshold[6],WebDataController.otherDevice[6]);
+        ruleTemplate(7,WebDataController.gateway[7], WebDataController.ruleName[7],WebDataController.threshold[7],WebDataController.parameterName[7],WebDataController.symbol[7],WebDataController.operation[7],WebDataController.service[7],WebDataController.device[7],flag7,WebDataController.otherLogic[7],WebDataController.otherParameterName[7],WebDataController.otherSymbol[7],WebDataController.otherThreshold[7],WebDataController.otherDevice[7]);
+        ruleTemplate(8,WebDataController.gateway[8], WebDataController.ruleName[8],WebDataController.threshold[8],WebDataController.parameterName[8],WebDataController.symbol[8],WebDataController.operation[7],WebDataController.service[8],WebDataController.device[8],flag8,WebDataController.otherLogic[8],WebDataController.otherParameterName[8],WebDataController.otherSymbol[8],WebDataController.otherThreshold[8],WebDataController.otherDevice[8]);
+        ruleTemplate(9,WebDataController.gateway[9], WebDataController.ruleName[9],WebDataController.threshold[9],WebDataController.parameterName[9],WebDataController.symbol[9],WebDataController.operation[8],WebDataController.service[9],WebDataController.device[9],flag9,WebDataController.otherLogic[9],WebDataController.otherParameterName[9],WebDataController.otherSymbol[9],WebDataController.otherThreshold[9],WebDataController.otherDevice[9]);
 
         kieSession.dispose();
 
+        kieSession = null;
+
+        terminal0 = null;
+        terminal1 = null;
+        terminal2 = null;
+        terminal3 = null;
+        terminal4 = null;
+        terminal5 = null;
+        terminal6 = null;
+        terminal7 = null;
+        terminal8 = null;
+        terminal9 = null;
     }
-    public void ruleTemplate (int index, String ruleName,int OutThreshold,String name,String symbol,String operation,String service, String device, int flag1, String[] otherLogic, String[] otherParameterName, String[] otherSymbol, int[] otherThreshold, String[] otherDevice)
+    public void ruleTemplate (int index,String gateway, String ruleName,int OutThreshold,String name,String symbol,String operation,String service, String device, int flag1, String[] otherLogic, String[] otherParameterName, String[] otherSymbol, int[] otherThreshold, String[] otherDevice)
     {
         if(name==null)  return;
         String flagMsg = "";
@@ -163,20 +175,19 @@ public class TerminalDataController {
                     content += otherParameterName[j]+otherSymbol[j]+otherThreshold[j]+",";
                 }
             }
+            content = gateway + ":" + content + "!";
 
             //放到日志中的alert消息
             JSONObject alert = new JSONObject();
             alert.put("type","alert");
-            alert.put("message",content+"!");
+            alert.put("message",content);
             alert.put("source",ruleName);
 
-            System.out.println("告警标志位是:" + flagMsg + "——————————最后的标志位是————————————:" + Flag);
+            flagMsg = null;
 
             if(operation.equals("告警") || operation.equals("告警且操作设备")){
+                postController.sendPostRequest("http://localhost:8099/api/getMessage", alert);
                 mqProducer.publish("notice",alert.toString());
-                System.out.println(index);
-                System.out.println(RuleController.arrFlag[index]);
-                System.out.println(RuleController.arrMsg[index]);
                 if(!RuleController.arrFlag[index]) {
                     RuleController.arrFlag[index] = true;
                     RuleController.arrMsg[index] = content;
@@ -187,6 +198,7 @@ public class TerminalDataController {
             {
                 JSONObject json = new JSONObject();
                 json.put("name",service);
+                postController.sendPostRequest("http://localhost:8099/api/getCommand", json);
                 mqProducer.publish("run.command",json.toString());
             }
         } else{

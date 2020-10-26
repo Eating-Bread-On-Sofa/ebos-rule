@@ -26,6 +26,7 @@ public class WebDataController {
     public static String [] symbol3= new String[10];
     public static String [] logic2 = new String[10];
     public static String [] logic3 = new String[10];
+    public static String [] gateway = new String[10];
 
     public static String [][] otherLogic;
     public static int [][] otherThreshold;
@@ -36,7 +37,7 @@ public class WebDataController {
     @CrossOrigin
     @PostMapping("/webdata")
     public String Webdata(@RequestBody JSONObject info){
-        System.out.println("Web页面++++++++++++++++++++++++++++");
+        System.out.println("------------------------------Web页面----------------------------");
         int threshold = info.getIntValue("ruleParaThreshold");
         String name = info.getString("rulePara");
         String symbol = info.getString("ruleJudge");
@@ -45,6 +46,7 @@ public class WebDataController {
         String ruleName = info.getString("ruleName");
         String device = info.getString("device");
         String scenario = info.getString("scenario");
+        String gateway = info.getString("gateway");
         JSONArray otherRules = info.getJSONArray("otherRules");
         int otherRulesLen = otherRules.size();
         this.otherDevice = new String [10][otherRulesLen];
@@ -52,8 +54,6 @@ public class WebDataController {
         this.otherThreshold = new int [10][otherRulesLen];
         this.otherLogic = new String [10][otherRulesLen];
         this.otherParameterName = new String [10][otherRulesLen];
-
-        System.out.println("Web页面" + ruleName);
 
         for (int i = 0; i<10; i++)
             if (this.parameterName[i] == null)
@@ -66,6 +66,7 @@ public class WebDataController {
                 this.ruleName[i] = ruleName;
                 this.device[i] = device;
                 this.scenario[i] = scenario;
+                this.gateway[i] = gateway;
                 for(int j=0; j<otherRulesLen; j++){
                     this.otherDevice [i][j] = otherRules.getJSONObject(j).getString("device");
                     this.otherSymbol [i][j] = otherRules.getJSONObject(j).getString("ruleJudge");

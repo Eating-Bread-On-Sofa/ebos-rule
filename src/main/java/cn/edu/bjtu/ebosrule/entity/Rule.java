@@ -26,6 +26,7 @@ public class Rule {
     private String service;
     private String device;
     private String scenario;
+    private String gateway;
 
 
     public JSONArray getOtherRules() {
@@ -47,6 +48,13 @@ public class Rule {
     }
     public void setRuleId(String ruleId) {
         this.ruleId = ruleId;
+    }
+
+    public String getGateway() {
+        return gateway;
+    }
+    public void setGateway(String gateway) {
+        this.gateway = gateway;
     }
 
     public String getRuleName() {
