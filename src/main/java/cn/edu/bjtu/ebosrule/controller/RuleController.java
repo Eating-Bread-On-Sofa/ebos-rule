@@ -179,13 +179,13 @@ public class RuleController {
         logService.error("create","查");
         return "成功";
     }
-
+//
     @CrossOrigin
     @GetMapping("/logtest")
     public List<Log> loggerTest(){
         return logService.findAll();
     }
-
+//
     @ApiOperation(value = "微服务订阅mq的主题")
     @CrossOrigin
     @PostMapping("/subscribe")
@@ -246,5 +246,13 @@ public class RuleController {
         MqProducer mqProducer = mqFactory.createProducer();
         mqProducer.publish(topic,message);
         return "发布成功";
+    }
+
+    @ApiOperation(value = "微服务健康检查")
+    @CrossOrigin
+    @GetMapping("/ping")
+    public String ping(){
+        logService.info("retrieve","对网关管理进行了一次健康检测");
+        return "pong";
     }
 }
