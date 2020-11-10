@@ -1,11 +1,15 @@
 package cn.edu.bjtu.ebosrule.controller;
 
+import cn.edu.bjtu.ebosrule.service.LogService;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api")
 @RestController
 public class RuleEditController {
+    @Autowired
+    LogService logService;
     public static String [] ruleName= new String[10];
 
     @CrossOrigin
@@ -36,5 +40,6 @@ public class RuleEditController {
             else
                 continue;
         }
+        logService.info("update","用户编辑规则："+ruleName);
     }
 }

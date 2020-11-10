@@ -11,6 +11,8 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 
 @RequestMapping("/api")
 @RestController
@@ -23,6 +25,9 @@ public class TerminalDataController {
     public static int value_wet;
     public static String device;
     public static int value;
+
+    public static String[] arrMsg = {"","","","","","","","","",""};
+    public static Boolean[] arrFlag = {false,false,false,false,false,false,false,false,false,false};
 
     @CrossOrigin
     @PostMapping("/terminaldata")
@@ -103,6 +108,17 @@ public class TerminalDataController {
         ruleTemplate(7,WebDataController.gateway[7], WebDataController.ruleName[7],WebDataController.threshold[7],WebDataController.parameterName[7],WebDataController.symbol[7],WebDataController.operation[7],WebDataController.service[7],WebDataController.device[7],flag7,WebDataController.otherLogic[7],WebDataController.otherParameterName[7],WebDataController.otherSymbol[7],WebDataController.otherThreshold[7],WebDataController.otherDevice[7]);
         ruleTemplate(8,WebDataController.gateway[8], WebDataController.ruleName[8],WebDataController.threshold[8],WebDataController.parameterName[8],WebDataController.symbol[8],WebDataController.operation[7],WebDataController.service[8],WebDataController.device[8],flag8,WebDataController.otherLogic[8],WebDataController.otherParameterName[8],WebDataController.otherSymbol[8],WebDataController.otherThreshold[8],WebDataController.otherDevice[8]);
         ruleTemplate(9,WebDataController.gateway[9], WebDataController.ruleName[9],WebDataController.threshold[9],WebDataController.parameterName[9],WebDataController.symbol[9],WebDataController.operation[8],WebDataController.service[9],WebDataController.device[9],flag9,WebDataController.otherLogic[9],WebDataController.otherParameterName[9],WebDataController.otherSymbol[9],WebDataController.otherThreshold[9],WebDataController.otherDevice[9]);
+
+        JSONObject j=new JSONObject();
+        ArrayList<String> al = new ArrayList<String>();
+        for(int i=0; i<10; i++){
+            if(arrFlag[i]){
+                al.add(arrMsg[i]);
+            }
+        }
+        j.put("alertList", al);
+        postController.sendPostRequest("http://localhost:8099/api/xiejiekou", j);
+        j=null;
 
         kieSession.dispose();
 

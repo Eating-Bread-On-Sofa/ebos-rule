@@ -1,11 +1,15 @@
 package cn.edu.bjtu.ebosrule.controller;
 
+import cn.edu.bjtu.ebosrule.service.LogService;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api")
 @RestController
 public class RuleDeleteController {
+    @Autowired
+    LogService logService;
 
     public static String [] ruleName= new String[10];
 
@@ -29,5 +33,6 @@ public class RuleDeleteController {
             else
                 continue;
         }
+        logService.info("delete","成功删除规则:"+ruleName);
     }
 }

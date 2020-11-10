@@ -52,6 +52,7 @@ public class RuleController {
         System.out.println(info);
         ja.add(info);
         this.loadRule();
+//        logService.info("retrieve","用户接收规则消息");
         return "收到";
     }
 
@@ -61,6 +62,7 @@ public class RuleController {
         Pageable pageable = PageRequest.of(page-1, limit);
         Page<Rule> rules =  ruleService.findAllRule(pageable);
         LayuiTableResultUtil<List<Rule>> rulesTable=new LayuiTableResultUtil<List<Rule>>("",rules.getContent(),0,(int)rules.getTotalElements());
+//        logService.info("retrieve","用户接收规则列表");
         return rulesTable;
     }
 
@@ -85,6 +87,7 @@ public class RuleController {
         }
         this.ja=ja;
         this.loadRule();
+//        logService.info("retrieve","用户接收规则列表");
         return ja;
     }
 
@@ -100,6 +103,7 @@ public class RuleController {
         }
         j.put("alertList", al);
         System.out.println("ruleAlert拉取的告警信息—++++++++++++++++++++++++++" + j);
+        logService.warn("create","存在告警信息");
         return j;
     }
 
@@ -113,6 +117,7 @@ public class RuleController {
                 return true;
             }
         }
+        logService.error("create","添加新规则失败");
         return false;
     }
 
