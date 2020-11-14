@@ -112,6 +112,12 @@ public class RuleController {
     public Boolean addRule(@RequestBody Rule rule) {
         System.out.println(rule);
         if (rule != null) {
+            for (int i = 0; i < ruleService.findAllRule().size(); i++) {
+                if (rule.getRuleName() == ruleService.findAllRule().get(i).getRuleName()) {
+                    logService.error("create","规则名称重复");
+                    return false;
+                }
+            }
             if (ruleService.addRule(rule)) {
                 logService.info("create","添加新规则"+rule.getRulePara()+rule.getRuleJudge()+rule.getRuleParaThreshold());
                 return true;
