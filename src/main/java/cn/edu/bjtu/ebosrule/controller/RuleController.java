@@ -110,7 +110,6 @@ public class RuleController {
         }
         j.put("alertList", al);
         System.out.println("ruleAlert拉取的告警信息—++++++++++++++++++++++++++" + j);
-        logService.warn("create","存在告警信息");
         return j;
     }
 
@@ -270,7 +269,6 @@ public class RuleController {
     @CrossOrigin
     @GetMapping("/ping")
     public String ping(){
-        logService.info("retrieve","对网关管理进行了一次健康检测");
         return "pong";
     }
 }
