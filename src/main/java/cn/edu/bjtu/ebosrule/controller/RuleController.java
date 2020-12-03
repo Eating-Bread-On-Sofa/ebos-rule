@@ -59,8 +59,9 @@ public class RuleController {
     @CrossOrigin
     @PostMapping("/ruleLoad")
     public String ruleLoad(@RequestBody JSONObject info) {
+        System.out.println("加载数据完成");
         this.loadRule();
-        return "收到";
+        return "rule加载完成";
     }
 
     @CrossOrigin
