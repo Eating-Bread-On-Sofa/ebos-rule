@@ -28,6 +28,7 @@ public class TerminalDataController {
 
     public static String[] arrMsg = {"","","","","","","","","",""};
     public static Boolean[] arrFlag = {false,false,false,false,false,false,false,false,false,false};
+    public static String mainGateway;
 
     @CrossOrigin
     @PostMapping("/terminaldata")
@@ -39,6 +40,7 @@ public class TerminalDataController {
 
     @Test
     public void Test() {
+        System.out.println("________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________");
         KieServices kieServices = KieServices.Factory.get();
         KieContainer kieContainer = kieServices.getKieClasspathContainer();
         KieSession kieSession = kieContainer.newKieSession("all-rules");
@@ -98,6 +100,7 @@ public class TerminalDataController {
         int flag8=terminal8.getFlag();
         int flag9=terminal9.getFlag();
 
+
         ruleTemplate(0,WebDataController.gateway[0], WebDataController.ruleName[0],WebDataController.threshold[0],WebDataController.parameterName[0],WebDataController.symbol[0],WebDataController.operation[0],WebDataController.service[0],WebDataController.device[0],flag0,WebDataController.otherLogic[0],WebDataController.otherParameterName[0],WebDataController.otherSymbol[0],WebDataController.otherThreshold[0],WebDataController.otherDevice[0]);
         ruleTemplate(1,WebDataController.gateway[1], WebDataController.ruleName[1],WebDataController.threshold[1],WebDataController.parameterName[1],WebDataController.symbol[1],WebDataController.operation[1],WebDataController.service[1],WebDataController.device[1],flag1,WebDataController.otherLogic[1],WebDataController.otherParameterName[1],WebDataController.otherSymbol[1],WebDataController.otherThreshold[1],WebDataController.otherDevice[1]);
         ruleTemplate(2,WebDataController.gateway[2], WebDataController.ruleName[2],WebDataController.threshold[2],WebDataController.parameterName[2],WebDataController.symbol[2],WebDataController.operation[2],WebDataController.service[2],WebDataController.device[2],flag2,WebDataController.otherLogic[2],WebDataController.otherParameterName[2],WebDataController.otherSymbol[2],WebDataController.otherThreshold[2],WebDataController.otherDevice[2]);
@@ -139,6 +142,7 @@ public class TerminalDataController {
     public void ruleTemplate (int index,String gateway, String ruleName,int OutThreshold,String name,String symbol,String operation,String service, String device, int flag1, String[] otherLogic, String[] otherParameterName, String[] otherSymbol, int[] otherThreshold, String[] otherDevice)
     {
         if(name==null)  return;
+        System.out.println(index+"第..................个。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。");
         String flagMsg = "";
         int Flag=0;
         int i=0;
@@ -201,14 +205,16 @@ public class TerminalDataController {
             alert.put("source",ruleName);
 
             flagMsg = null;
-
+//            System.out.println("gateway+++++++++++++++++++++"+gateway);
             if(operation.equals("告警") || operation.equals("告警且操作设备")){
-                postController.sendPostRequest("http://localhost:8099/api/getMessage", alert);
-                mqProducer.publish("notice",alert.toString());
-                if(!RuleController.arrFlag[index]) {
-                    RuleController.arrFlag[index] = true;
-                    RuleController.arrMsg[index] = content;
-                }
+                String mainIp = "http://localhost:8099/api/getMessage";
+                postController.sendPostRequest(mainIp, alert);
+                System.out.println("告警已发送+++++++++++++++++++++");
+//                mqProducer.publish("notice",alert.toString());
+//                if(!RuleController.arrFlag[index]) {
+//                    RuleController.arrFlag[index] = true;
+//                    RuleController.arrMsg[index] = content;
+//                }
             }
 
             if (operation.equals("告警且操作设备") || operation.equals("操作设备"))
@@ -216,12 +222,13 @@ public class TerminalDataController {
                 JSONObject json = new JSONObject();
                 json.put("name",service);
                 postController.sendPostRequest("http://localhost:8099/api/getCommand", json);
-                mqProducer.publish("run.command",json.toString());
+//                mqProducer.publish("run.command",json.toString());
             }
-        } else{
-            RuleController.arrFlag[index] = false;
-            RuleController.arrMsg[index] = "";
         }
+//        else{
+//            RuleController.arrFlag[index] = false;
+//            RuleController.arrMsg[index] = "";
+//        }
     }
     public void terminalTemplate(Terminal t, int threshold1, String parameterName1, String symbol1, String operation, String scenario, int threshold2, String parameterName2, String symbol2, int threshold3, String parameterName3, String symbol3)
     {

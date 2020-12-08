@@ -8,6 +8,7 @@ import cn.edu.bjtu.ebosrule.dao.RuleRepository;
 import cn.edu.bjtu.ebosrule.entity.Rule;
 import cn.edu.bjtu.ebosrule.util.LayuiTableResultUtil;
 import io.swagger.annotations.ApiOperation;
+import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -41,16 +42,16 @@ public class RuleController {
 
     @Value("${server.edgex}")
     private String ip;
-    JSONArray ja = new JSONArray();
 
-    public static String[] arrMsg = {"","","","","","","","","",""};
-    public static Boolean[] arrFlag = {false,false,false,false,false,false,false,false,false,false};
+//    public static String[] arrMsg = {"","","","","","","","","",""};
+//    public static Boolean[] arrFlag = {false,false,false,false,false,false,false,false,false,false};
+
+//    alMsg用于存放告警信息
+    public static ArrayList<String> alMsg;
 
     @CrossOrigin
     @PostMapping("/ruleReceive")
     public String ruleReceive(@RequestBody JSONObject info) {
-        System.out.println(info);
-        ja.add(info);
         this.loadRule();
 //        logService.info("retrieve","用户接收规则消息");
         return "收到";
@@ -59,7 +60,10 @@ public class RuleController {
     @CrossOrigin
     @PostMapping("/ruleLoad")
     public String ruleLoad(@RequestBody JSONObject info) {
-        System.out.println("加载数据完成");
+        System.out.println("ruleLoad执行——————————————————————————————————————————-");
+        System.out.println(info);
+        String mainGateway = info.getString("mainGateway");
+        TerminalDataController.mainGateway = mainGateway;
         this.loadRule();
         return "rule加载完成";
     }
@@ -75,49 +79,18 @@ public class RuleController {
     }
 
 //    @CrossOrigin
-//    @GetMapping("/getRuleLists")
-//    public JSONArray getRule(){
-//        JSONArray ja = new JSONArray();
-//        for (int i = 0; i < ruleService.findAllRule().size(); i++) {
-//            JSONObject j=new JSONObject();
-//            j.put("ruleName",ruleService.findAllRule().get(i).getRuleName());
-//            j.put("parameter",ruleService.findAllRule().get(i).getRulePara());
-//            j.put("ruleJudge",ruleService.findAllRule().get(i).getRuleJudge());
-//            j.put("threshold",ruleService.findAllRule().get(i).getRuleParaThreshold());
-//            j.put("ruleExecute",ruleService.findAllRule().get(i).getRuleExecute());
-//            j.put("ruleId",ruleService.findAllRule().get(i).getRuleId());
-//            j.put("service",ruleService.findAllRule().get(i).getService());
-//            j.put("device",ruleService.findAllRule().get(i).getDevice());
-//            j.put("scenario",ruleService.findAllRule().get(i).getScenario());
-//            j.put("gateway",ruleService.findAllRule().get(i).getGateway());
-//            j.put("otherRules",ruleService.findAllRule().get(i).getOtherRules());
-//            ja.add(j);
-//        }
-//        this.ja=ja;
-//        this.loadRule();
-//        logService.info("retrieve","用户接收规则列表");
-//        return ja;
+//    @GetMapping("/ruleAlert")
+//    public JSONObject getRuleAlert(){
+//        JSONObject j=new JSONObject();
+//        j.put("alertList", alMsg);
+//        System.out.println("ruleAlert拉取的告警信息—++++++++++++++++++++++++++" + j);
+//        return j;
 //    }
-
-    @CrossOrigin
-    @GetMapping("/ruleAlert")
-    public JSONObject getRuleAlert(){
-        JSONObject j=new JSONObject();
-        ArrayList<String> al = new ArrayList<String>();
-        for(int i=0; i<10; i++){
-            if(arrFlag[i]){
-                al.add(arrMsg[i]);
-            }
-        }
-        j.put("alertList", al);
-        System.out.println("ruleAlert拉取的告警信息—++++++++++++++++++++++++++" + j);
-        return j;
-    }
 
     @CrossOrigin
     @PostMapping("/ruleCreate")
     public Boolean addRule(@RequestBody Rule rule) {
-        System.out.println(rule);
+        this.loadRule();
         if (rule != null) {
             for (int i = 0; i < ruleService.findAllRule().size(); i++) {
                 if (rule.getRuleName() == ruleService.findAllRule().get(i).getRuleName()) {
@@ -136,14 +109,42 @@ public class RuleController {
 
     @CrossOrigin
     @PostMapping("/rule")
-    public LayuiTableResultUtil<String> deleteRule(@RequestBody Rule rule){
-        String deleteStatus = ruleService.deleteRule(rule.getRuleId());
-        return  new LayuiTableResultUtil<String>("",deleteStatus,0,1);
+    public String deleteRule(@RequestBody Rule rule){
+        String deleteMsg = "未删除";
+        String name = rule.getRuleName();
+        int len = ruleService.findAllRule().size();
+        for (int i = 0; i <len ; i++) {
+            Rule r = ruleService.findAllRule().get(i);
+            String rName = r.getRuleName();
+            if (name.equals(rName)) {
+                String id = r.getRuleId();
+                System.out.println("id是："+id);
+                deleteMsg = ruleService.deleteRule(id);
+            }
+        }
+        return  "删除结果"+deleteMsg;
     }
 
     public void loadRule()
     {
-        JSONArray ja = this.ja;
+        System.out.println("。。。。。。。。。。。。。。。。。。。。。。。。。。。load规则");
+        JSONArray ja = new JSONArray();
+        for (int i = 0; i < ruleService.findAllRule().size(); i++) {
+            JSONObject j=new JSONObject();
+            j.put("ruleName",ruleService.findAllRule().get(i).getRuleName());
+            j.put("parameter",ruleService.findAllRule().get(i).getRulePara());
+            j.put("ruleJudge",ruleService.findAllRule().get(i).getRuleJudge());
+            j.put("threshold",ruleService.findAllRule().get(i).getRuleParaThreshold());
+            j.put("ruleExecute",ruleService.findAllRule().get(i).getRuleExecute());
+            j.put("ruleId",ruleService.findAllRule().get(i).getRuleId());
+            j.put("service",ruleService.findAllRule().get(i).getService());
+            j.put("device",ruleService.findAllRule().get(i).getDevice());
+            j.put("scenario",ruleService.findAllRule().get(i).getScenario());
+            j.put("gateway",ruleService.findAllRule().get(i).getGateway());
+            j.put("otherRules",ruleService.findAllRule().get(i).getOtherRules());
+            ja.add(j);
+        }
+        System.out.println(ja);
         for (int i = 0; i < ja.size(); i++)
         {
             JSONObject j = (JSONObject) ja.get(i);

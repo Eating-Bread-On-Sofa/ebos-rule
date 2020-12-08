@@ -16,17 +16,25 @@ public class RuleDeleteController {
     @CrossOrigin
     @PostMapping("/ruleDelete")
     //清空内存中的数据
-    public void ruleDelete(@RequestBody JSONObject info)
+    public String ruleDelete(@RequestBody JSONObject info)
     {
         String ruleName = info.getString("ruleName");
         for (int i = 0; i<10; i++) {
             if((WebDataController.ruleName[i])!=null) {
                 if ((WebDataController.ruleName[i]).equals(ruleName)) {
+                    WebDataController.ruleName[i] = null;
                     WebDataController.parameterName[i] = null;
                     WebDataController.threshold[i] = 0;
                     WebDataController.symbol[i] = null;
                     WebDataController.operation[i] = null;
                     WebDataController.service[i] = null;
+                    WebDataController.device[i] = null;
+                    WebDataController.gateway[i] = null;
+                    WebDataController.otherDevice[i] = null;
+                    WebDataController.otherSymbol[i] = null;
+                    WebDataController.otherThreshold[i] = null;
+                    WebDataController.otherLogic[i] = null;
+                    WebDataController.otherParameterName[i] = null;
                     break;
                 }
             }
@@ -34,5 +42,6 @@ public class RuleDeleteController {
                 continue;
         }
         logService.info("delete","成功删除规则:"+ruleName);
+        return "83删除内存成功";
     }
 }
