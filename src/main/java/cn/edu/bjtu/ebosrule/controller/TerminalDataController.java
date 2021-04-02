@@ -123,6 +123,31 @@ public class TerminalDataController {
         postController.sendPostRequest("http://localhost:8099/api/xiejiekou", j);
         j=null;
 
+        //释放
+        kieSession.delete(kieSession.insert(terminal0));
+        kieSession.delete(kieSession.insert(terminal1));
+        kieSession.delete(kieSession.insert(terminal2));
+        kieSession.delete(kieSession.insert(terminal3));
+        kieSession.delete(kieSession.insert(terminal4));
+        kieSession.delete(kieSession.insert(terminal5));
+        kieSession.delete(kieSession.insert(terminal6));
+        kieSession.delete(kieSession.insert(terminal7));
+        kieSession.delete(kieSession.insert(terminal8));
+        kieSession.delete(kieSession.insert(terminal9));
+
+        //retract is used in drools 6.4,however it is drools 6.5.0
+//        kieSession.retract(kieSession.getFactHandle(terminal0));
+//        kieSession.retract(kieSession.getFactHandle(terminal1));
+//        kieSession.retract(kieSession.getFactHandle(terminal2));
+//        kieSession.retract(kieSession.getFactHandle(terminal3));
+//        kieSession.retract(kieSession.getFactHandle(terminal4));
+//        kieSession.retract(kieSession.getFactHandle(terminal5));
+//        kieSession.retract(kieSession.getFactHandle(terminal6));
+//        kieSession.retract(kieSession.getFactHandle(terminal7));
+//        kieSession.retract(kieSession.getFactHandle(terminal8));
+//        kieSession.retract(kieSession.getFactHandle(terminal9));
+
+
         kieSession.dispose();
 
         kieSession = null;

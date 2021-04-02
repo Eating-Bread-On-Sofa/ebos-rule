@@ -53,6 +53,7 @@ public class RuleController {
     @PostMapping("/ruleReceive")
     public String ruleReceive(@RequestBody JSONObject info) {
         this.loadRule();
+        System.out.println(info);
 //        logService.info("retrieve","用户接收规则消息");
         return "收到";
     }
